@@ -1,12 +1,14 @@
 from typing import Union
 from fastapi import FastAPI, File, UploadFile
+
 import requests
-
-
 import openai
+from chat import chat
+from whisper import voice_to_text
 from dotenv import load_dotenv, find_dotenv
 import os
 from os.path import join, dirname
+import aiofiles
 
 
 
@@ -23,8 +25,13 @@ app = FastAPI()
 def read_root():
     return { dotenv_path : find_dotenv()}
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None, n: Union[str,None] = "a"):
-    n = f"{n}ですよー"
-    return {"item_id": item_id + 1, "q": q, "n": n}
-
+@app.post("/upload/")
+async def upload_audio(file: UploadFile = File(...)):
+    async with aiofiles.open('tmp/input.wav', 'wb') as out_file:
+        content = await file.read()  # Read file content
+        await out_file.write(content)
+    # 音声ファイルをテキストに変換
+    text = voice_to_text('tmp/input.wav')
+    # テキストをLLMに渡して応答を取得
+    response = chat(text)
+    return {"input_text": text, "response": response}

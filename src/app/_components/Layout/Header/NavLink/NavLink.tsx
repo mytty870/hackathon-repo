@@ -18,9 +18,6 @@ export const NavLink = ({ href, children, className }: NavLinkProps) => {
   return (
     <Link
       href={href}
-      // className={`text-blue-600 font-medium py-2 px-2 ${
-      //   isActive ? 'border-b-4 border-blue-600' : 'border-b-4 border-transparent'
-      // } hover:border-blue-600`}
       className={clsx(
         'p-2 font-medium text-blue-600',
         {
@@ -28,7 +25,7 @@ export const NavLink = ({ href, children, className }: NavLinkProps) => {
           'border-b-4 border-transparent': !isActive,
         },
         'hover:border-blue-600',
-        className, // 親コンポーネントから渡されたclassNameをマージ
+        className,
       )}
     >
       {children}

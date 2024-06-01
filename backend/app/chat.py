@@ -1,7 +1,18 @@
 import openai
 import json
+from dotenv import load_dotenv, find_dotenv
+import os
+from os.path import join, dirname
+
 
 def chat(text) -> str:
+    dotenv_path = join(dirname(__file__), '.env')
+    load_dotenv(verbose=True, dotenv_path=dotenv_path)
+
+    OPENAI_APIKEY = os.getenv("API_KEY")
+    openai.api_key = OPENAI_APIKEY
+
+
     result = openai.chat.completions.create(
         model='gpt-4o',
         response_format={ "type": "json_object" },

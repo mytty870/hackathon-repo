@@ -13,6 +13,10 @@ import { useState } from 'react'
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  const handleLinkClick = () => {
+    setIsMenuOpen(false)
+  }
+
   const serviceItems = [
     { name: '面接練習', href: '/interview-feedback' },
     { name: '文字入力', href: '/' },
@@ -72,7 +76,9 @@ export const Header = () => {
         <NavbarMenu>
           {serviceItems.map(item => (
             <NavbarMenuItem className="mb-4" key={`${item.name}`}>
-              <NavLink href={item.href}>{item.name}</NavLink>
+              <NavLink href={item.href} onClick={handleLinkClick}>
+                {item.name}
+              </NavLink>
             </NavbarMenuItem>
           ))}
         </NavbarMenu>

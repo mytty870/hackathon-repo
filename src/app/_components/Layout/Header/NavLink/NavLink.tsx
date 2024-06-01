@@ -2,16 +2,22 @@
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { ReactNode } from 'react'
+import { MouseEventHandler, ReactNode } from 'react'
 import clsx from 'clsx'
 
 type NavLinkProps = {
   href: string
   children: ReactNode
   className?: string
+  onClick?: MouseEventHandler<HTMLAnchorElement>
 }
 
-export const NavLink = ({ href, children, className }: NavLinkProps) => {
+export const NavLink = ({
+  href,
+  children,
+  className,
+  onClick,
+}: NavLinkProps) => {
   const pathname = usePathname()
   const isActive = pathname === href
 
@@ -27,6 +33,7 @@ export const NavLink = ({ href, children, className }: NavLinkProps) => {
         'hover:border-blue-600',
         className,
       )}
+      onClick={onClick}
     >
       {children}
     </Link>

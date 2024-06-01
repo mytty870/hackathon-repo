@@ -15,7 +15,6 @@ import aiofiles
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(verbose=True, dotenv_path=dotenv_path)
-
 OPENAI_APIKEY = os.getenv("API_KEY")
 openai.api_key = OPENAI_APIKEY
 
@@ -26,24 +25,7 @@ app = FastAPI()
 def read_root():
     return { dotenv_path : OPENAI_APIKEY}
 
-
-
 @app.post("/upload/")
-async def upload_audio(files: List[UploadFile] = File(...)):
-    results = []
-    for file in files:
-        async with aiofiles.open(f'tmp/{file.filename}', 'wb') as out_file:
-            content = await file.read()  # Read file content
-            await out_file.write(content)
-        # 音声ファイルをテキストに変換
-        text = voice_to_text(f'tmp/{file.filename}')
-        # テキストをLLMに渡して応答を取得
-        response = chat(text)
-        results.append({"filename": file.filename, "input_text": text, "response": response})
-
-    return json.dumps(results, ensure_ascii=False, indent=4)
-
-@app.post("/upload2/")
 async def upload_audio(files: List[UploadFile] = File(...)):
     results = []
     video_list = []
@@ -51,7 +33,6 @@ async def upload_audio(files: List[UploadFile] = File(...)):
         async with aiofiles.open(f'tmp/{file.filename}', 'wb') as out_file:
             content = await file.read()  # Read file content
             await out_file.write(content)
-
         video_list.append(f"tmp/{file.filename}")
     
     # ProcessPoolExecutorを使用して複数のプロセスで処理
@@ -59,6 +40,5 @@ async def upload_audio(files: List[UploadFile] = File(...)):
         text_list = list(executor.map(voice_to_text, video_list))
     with ProcessPoolExecutor() as executor:
         feedback_list = list(executor.map(chat, text_list))
-
     results = [{"filename": files[i].filename, "input_text": text_list[i], "response": feedback_list[i]} for i in range(len(video_list))]
     return json.dumps(results, ensure_ascii=False, indent=4)

@@ -12,3 +12,4 @@ def voice_to_text(url):
         model = 'whisper-1',
         language='ja')
     return transcript.text
+    

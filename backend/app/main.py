@@ -1,6 +1,7 @@
 from concurrent.futures import ProcessPoolExecutor
 from typing import Union, List
 from fastapi import FastAPI, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 import json 
 import requests
 import openai
@@ -20,6 +21,18 @@ openai.api_key = OPENAI_APIKEY
 
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",  # Reactのサーバーを許可する
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # 許可するオリジンを指定
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():

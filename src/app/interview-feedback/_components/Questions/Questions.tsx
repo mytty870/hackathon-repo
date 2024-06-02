@@ -11,6 +11,8 @@ export const Questions = () => {
   const [file1, setFile1] = useState<string | null>(null)
   const [file2, setFile2] = useState<string | null>(null)
   const [file3, setFile3] = useState<string | null>(null)
+  const [file4, setFile4] = useState<string | null>(null)
+  const [file5, setFile5] = useState<string | null>(null)
 
   if (evaluateFlag) {
     return (
@@ -19,6 +21,8 @@ export const Questions = () => {
         <div>file1: {file1}</div>
         <div>file2: {file2}</div>
         <div>file3: {file3}</div>
+        <div>file4: {file4}</div>
+        <div>file5: {file5}</div>
       </div>
     )
   }
@@ -31,6 +35,8 @@ export const Questions = () => {
       setFile1={setFile1}
       setFile2={setFile2}
       setFile3={setFile3}
+      setFile4={setFile4}
+      setFile5={setFile5}
     />
   )
 }

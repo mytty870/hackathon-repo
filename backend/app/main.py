@@ -1,12 +1,13 @@
 from concurrent.futures import ProcessPoolExecutor
 from typing import Union, List
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 import json 
 import requests
 import openai
 from chat import chat
 from whisper import voice_to_text
+from es_feedback import es_feedback
 from dotenv import load_dotenv, find_dotenv
 import os
 from os.path import join, dirname
@@ -54,4 +55,14 @@ async def upload_audio(files: List[UploadFile] = File(...)):
     with ProcessPoolExecutor() as executor:
         feedback_list = list(executor.map(chat, text_list))
     results = [{"filename": files[i].filename, "input_text": text_list[i], "response": feedback_list[i]} for i in range(len(video_list))]
+    return json.dumps(results, ensure_ascii=False, indent=4)
+
+
+@app.post("/es_feedback/")
+async def upload_text(texts: List[str] = Form(...)):
+    # ProcessPoolExecutorを使用して複数のプロセスで処理
+    with ProcessPoolExecutor() as executor:
+        feedback_list = list(executor.map(es_feedback, texts))
+
+    results = [{"input_text": texts[i], "response": feedback_list[i]} for i in range(len(texts))]
     return json.dumps(results, ensure_ascii=False, indent=4)

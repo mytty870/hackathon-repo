@@ -198,7 +198,7 @@ export const Question = ({
         setIsRecording={setIsRecording}
         setIsRecorded={setIsRecorded}
       />
-      {questionNum === 2 ? (
+      {questionNum === 4 ? (
         <Button
           color="secondary"
           onClick={handleEvaluate}

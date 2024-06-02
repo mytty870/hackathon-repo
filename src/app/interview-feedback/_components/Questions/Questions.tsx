@@ -1,42 +1,42 @@
 'use client'
 
 import { useState } from 'react'
-import { Question } from './Question'
+import { EvaluationResult, Question } from './Question'
 
 export const Questions = () => {
+  const [recordings, setRecordings] = useState<Blob[]>([])
   const [questionNum, setQuestionNum] = useState(0)
 
   const [evaluateFlag, setEvaluateFlag] = useState(false)
 
-  const [file1, setFile1] = useState<string | null>(null)
-  const [file2, setFile2] = useState<string | null>(null)
-  const [file3, setFile3] = useState<string | null>(null)
-  const [file4, setFile4] = useState<string | null>(null)
-  const [file5, setFile5] = useState<string | null>(null)
+  const [isRecording, setIsRecording] = useState(false)
+  const [isRecorded, setIsRecorded] = useState(false)
+
+  const [evaluationResult, setEvaluationResult] = useState<
+    EvaluationResult[] | null
+  >(null)
 
   if (evaluateFlag) {
     return (
       <div>
         <h1>評価</h1>
-        <div>file1: {file1}</div>
-        <div>file2: {file2}</div>
-        <div>file3: {file3}</div>
-        <div>file4: {file4}</div>
-        <div>file5: {file5}</div>
+        <div>評価結果: {JSON.stringify(evaluationResult)}</div>
       </div>
     )
   }
 
   return (
     <Question
+      setRecordings={setRecordings}
+      recordings={recordings}
       questionNum={questionNum}
       setQuestionNum={setQuestionNum}
       setEvaluateFlag={setEvaluateFlag}
-      setFile1={setFile1}
-      setFile2={setFile2}
-      setFile3={setFile3}
-      setFile4={setFile4}
-      setFile5={setFile5}
+      isRecording={isRecording}
+      setIsRecording={setIsRecording}
+      isRecorded={isRecorded}
+      setIsRecorded={setIsRecorded}
+      setEvaluationResult={setEvaluationResult}
     />
   )
 }

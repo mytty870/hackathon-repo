@@ -1,15 +1,31 @@
+import React from 'react'
+
+import { EvaluationResult } from '../Question'
+import EvaluationDetails from './EvaluationDetails/EvaluationDetails'
+import EvaluationRadarChart from './EvaluationRadarChart/EvaluationRadarChart'
+import TotalScoreRadarChart from './TotalScoreRadarChart/TotalScoreRadarChart'
+
 type EvaluationProps = {
-  file1: string | null
-  file2: string | null
-  file3: string | null
+  evaluationResults: EvaluationResult[] | null
 }
-export const Evaluation = ({ file1, file2, file3 }: EvaluationProps) => {
+
+export const Evaluation: React.FC<EvaluationProps> = ({
+  evaluationResults,
+}) => {
+  if (!evaluationResults) {
+    return null
+  }
   return (
     <div>
-      <h1>評価</h1>
-      <div>file1: {file1}</div>
-      <div>file2: {file2}</div>
-      <div>file3: {file3}</div>
+      {evaluationResults.map((result, index) => (
+        <div key={index} style={{ marginBottom: '20px' }}>
+          <h2>質問{index + 1}の結果</h2>
+          <EvaluationRadarChart evaluationResult={result} />
+          <EvaluationDetails evaluationResult={result} />
+        </div>
+      ))}
+      <h2>総合スコア</h2>
+      <TotalScoreRadarChart evaluationResults={evaluationResults} />
     </div>
   )
 }

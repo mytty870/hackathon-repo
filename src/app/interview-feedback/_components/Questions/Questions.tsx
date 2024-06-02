@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { EvaluationResult, Question } from './Question'
+import { Evaluation } from './Evaluation'
 
 export const Questions = () => {
   const [recordings, setRecordings] = useState<Blob[]>([])
@@ -19,8 +20,9 @@ export const Questions = () => {
   if (evaluateFlag) {
     return (
       <div>
-        <h1>評価</h1>
-        <div>評価結果: {JSON.stringify(evaluationResult)}</div>
+        {/* <h1>評価</h1>
+        <div>評価結果: {JSON.stringify(evaluationResult)}</div> */}
+        <Evaluation evaluationResults={evaluationResult} />
       </div>
     )
   }

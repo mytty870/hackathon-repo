@@ -49,9 +49,12 @@ export const Question = ({
   setEvaluationResult,
 }: QuestionProps) => {
   const questionnaire = [
-    'あなたのお名前は?',
-    'あなたの出身は?',
-    'あなたの好きな食べ物は？',
+    '簡単な自己紹介と自己PRをお願いいたします。',
+    'あなたの強みについて教えてください。',
+    '就活の軸について教えてください。',
+    '仕事をするうえで大事なことについて教えてください。',
+    '学生時代に頑張ったことを教えてください。',
+    '自身に年収を提示するなら何円にしますか？',
   ]
 
   const [isLoading, setIsLoading] = useState(false)
@@ -186,7 +189,7 @@ export const Question = ({
 
   return (
     <>
-      <h2>質問{questionNum + 1}</h2>
+      <h2 className="text-xl">質問{questionNum + 1}</h2>
       <div>{questionnaire[questionNum]}</div>
       <Recorder
         setRecordings={setRecordings}
@@ -201,6 +204,7 @@ export const Question = ({
           onClick={handleEvaluate}
           isDisabled={!isRecorded}
           isLoading={isLoading}
+          className="mt-4"
         >
           {isLoading ? '評価中' : '評価する'}
         </Button>
@@ -209,6 +213,7 @@ export const Question = ({
           color="secondary"
           onClick={handleNextQuestion}
           isDisabled={!isRecorded}
+          className="mt-4"
         >
           次の質問へ
         </Button>

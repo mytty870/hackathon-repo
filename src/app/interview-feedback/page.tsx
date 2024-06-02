@@ -2,9 +2,8 @@ import { Questions } from './_components/Questions'
 
 export default function Page() {
   return (
-    <div className="flex flex-col">
-      <div className="mx-auto w-[400px] items-center justify-center">
-        <div>Interview Feedback Page</div>
+    <div className="flex items-center justify-center">
+      <div className="w-[70%] rounded-lg border border-gray-300 bg-white p-4 text-center shadow-md">
         <Questions />
       </div>
     </div>

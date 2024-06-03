@@ -188,8 +188,8 @@ export const Question = ({
   }
 
   return (
-    <>
-      <h2 className="text-xl">質問{questionNum + 1}</h2>
+    <div className="space-y-8">
+      <h2 className="text-2xl">質問{questionNum + 1}</h2>
       <div>{questionnaire[questionNum]}</div>
       <Recorder
         setRecordings={setRecordings}
@@ -198,26 +198,28 @@ export const Question = ({
         setIsRecording={setIsRecording}
         setIsRecorded={setIsRecorded}
       />
-      {questionNum === 4 ? (
-        <Button
-          color="secondary"
-          onClick={handleEvaluate}
-          isDisabled={!isRecorded}
-          isLoading={isLoading}
-          className="mt-4"
-        >
-          {isLoading ? '評価中' : '評価する'}
-        </Button>
-      ) : (
-        <Button
-          color="secondary"
-          onClick={handleNextQuestion}
-          isDisabled={!isRecorded}
-          className="mt-4"
-        >
-          次の質問へ
-        </Button>
-      )}
-    </>
+      <div>
+        {questionNum === 4 ? (
+          <Button
+            color="secondary"
+            onClick={handleEvaluate}
+            isDisabled={!isRecorded}
+            isLoading={isLoading}
+            className="mt-4"
+          >
+            {isLoading ? '評価中' : '評価する'}
+          </Button>
+        ) : (
+          <Button
+            color="secondary"
+            onClick={handleNextQuestion}
+            isDisabled={!isRecorded}
+            className=""
+          >
+            {questionNum + 2}問目
+          </Button>
+        )}
+      </div>
+    </div>
   )
 }

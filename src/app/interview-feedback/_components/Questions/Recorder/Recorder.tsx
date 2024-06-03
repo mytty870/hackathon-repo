@@ -1,5 +1,7 @@
 import { Button } from '@nextui-org/react'
 import { useEffect, useRef, useState } from 'react'
+import MicIcon from '@mui/icons-material/Mic'
+import StopCircle from '@mui/icons-material/StopCircle'
 
 type RecorderProps = {
   setRecordings: React.Dispatch<React.SetStateAction<Blob[]>>
@@ -63,13 +65,31 @@ export const Recorder = ({
 
   return (
     <div>
-      <Button
-        color="primary"
-        onClick={handleStartStopRecording}
-        isDisabled={isDisabled}
-      >
-        {isRecording ? '停止' : '録音開始'}
-      </Button>
+      {isRecording ? (
+        <Button
+          color="danger"
+          className="gap-1 bg-red-500 p-5 pl-4 font-semibold text-white"
+          size="lg"
+          disableRipple={true}
+          onClick={handleStartStopRecording}
+          isDisabled={isDisabled}
+          startContent={<StopCircle className="text-2xl text-white" />}
+        >
+          停止
+        </Button>
+      ) : (
+        <Button
+          color="success"
+          className="gap-1 bg-[#00CC00] p-5 pl-3 font-semibold text-white"
+          size="lg"
+          disableRipple={true}
+          onClick={handleStartStopRecording}
+          isDisabled={isDisabled}
+          startContent={<MicIcon className="text-2xl text-white" />}
+        >
+          録音開始
+        </Button>
+      )}
     </div>
   )
 }

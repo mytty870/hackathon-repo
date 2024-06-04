@@ -93,7 +93,7 @@ export const EsInput: React.FC = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col items-center justify-center space-y-4"
       >
-        <div className="w-[70%] space-y-4 rounded-lg border border-gray-300 bg-white p-3 text-center shadow-md">
+        <div className="space-y-4 rounded-lg border border-gray-300 bg-white p-3 text-center shadow-md md:w-[70%]">
           {questionList.map(({ id, question, qNum }) => (
             <div key={id} className="space-y-4">
               <h3 className="text-xl">質問{qNum}</h3>

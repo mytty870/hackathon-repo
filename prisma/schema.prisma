@@ -43,15 +43,15 @@ model Session {
 model User {
   id                String             @id @default(cuid())
   name              String?
-  userName          String?            @unique
+  userName          String?
   email             String?            @unique
   emailVerified     DateTime?
   image             String?
   createdAt         DateTime           @default(now())
   // 業種
-  industry          Industry?
+  industry          String?
   // 業態
-  businessType      BusinessType?
+  businessType      String?
   accounts          Account[]
   sessions          Session[]
   interviewSessions InterviewSession[]
@@ -62,7 +62,7 @@ model InterviewSession {
   id                 String              @id @default(cuid())
   userId             String
   user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  industry           Industry?
+  industry           String?
   businessType       String?
   createdAt          DateTime            @default(now())
   interviewQuestions InterviewQuestion[]

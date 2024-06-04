@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
 import { Header } from '@/app/_components/Layout/Header'
-import { getServerSession } from '@/lib/auth'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,13 +16,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const session = await getServerSession()
-
   return (
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Header session={session} />
+          <Header />
           <main className="mx-auto">{children}</main>
         </Providers>
       </body>

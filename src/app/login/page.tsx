@@ -1,11 +1,11 @@
 import { getServerSession } from '@/lib/auth'
 import { redirect } from 'next/navigation'
-import { LoginButtonGroup } from './LoginButonGroup'
+import { LoginButtonGroup } from './_components/LoginButonGroup'
 
 export default async function Page() {
   const session = await getServerSession()
 
-  if (session?.user) {
+  if (session?.user && session.user.userName) {
     /**
      * 仮でルートにリダイレクトするように設定している
      */

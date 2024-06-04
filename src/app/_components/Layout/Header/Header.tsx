@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  Button,
   Navbar,
   NavbarContent,
   NavbarMenu,
@@ -9,8 +10,15 @@ import {
 } from '@nextui-org/react'
 import { NavLink } from './NavLink'
 import { useState } from 'react'
+import Link from 'next/link'
+import { signOut } from 'next-auth/react'
+import { Session } from 'next-auth'
 
-export const Header = () => {
+type HeaderProps = {
+  session: Session | null
+}
+
+export const Header = ({ session }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleLinkClick = () => {
@@ -26,23 +34,6 @@ export const Header = () => {
 
   return (
     <>
-      {/* <header className="bg-white shadow-lg flex flex-col">
-      <div className="container mx-auto flex items-center justify-between py-2 px-4">
-        <div className="flex items-center space-x-4">
-          <h1 className='text-3xl text-blue-600 font-semibold'>就活AI</h1>
-        </div>
-      </div>
-      <div className={`border-t-3 border-blue-500 mt-2 hidden sm:block`}>
-        <div className="container mx-auto flex justify-center py-2 px-4 gap-12">
-          {serviceItems.map(item => (
-            <NavLink key={item.name} href={item.href}>
-              {item.name}
-            </NavLink>
-          ))}
-        </div>
-      </div>
-    </header> */}
-
       <Navbar
         className="mb-6 bg-white py-2 shadow-lg sm:py-0"
         classNames={{
@@ -55,6 +46,18 @@ export const Header = () => {
           <div className="flex items-center justify-between space-x-4">
             <h1 className="text-3xl font-semibold text-blue-600">就活AI</h1>
           </div>
+          {session && session.user ? (
+            <Button
+              color="danger"
+              onClick={() => signOut({ callbackUrl: 'http://localhost:3000' })}
+            >
+              ログアウト
+            </Button>
+          ) : (
+            <Link href="/login">
+              <Button color="primary">ログイン</Button>
+            </Link>
+          )}
           <NavbarContent justify="end">
             <NavbarMenuToggle
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}

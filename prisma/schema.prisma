@@ -13,8 +13,96 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Todo {
-  id         Int      @id @default(autoincrement())
-  title      String
-  created_at DateTime @default(now())
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @unique
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expires      DateTime
+}
+
+model User {
+  id                String             @id @default(cuid())
+  name              String?
+  userName          String?            @unique
+  email             String?            @unique
+  emailVerified     DateTime?
+  image             String?
+  createdAt         DateTime           @default(now())
+  // 業種
+  industry          Industry?
+  // 業態
+  businessType      BusinessType?
+  accounts          Account[]
+  sessions          Session[]
+  interviewSessions InterviewSession[]
+}
+
+// 各面接
+model InterviewSession {
+  id                 String              @id @default(cuid())
+  userId             String
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  industry           Industry?
+  businessType       String?
+  createdAt          DateTime            @default(now())
+  interviewQuestions InterviewQuestion[]
+}
+
+// 各質問
+model InterviewQuestion {
+  id                                 String                              @id @default(cuid())
+  sessionId                          String
+  session                            InterviewSession                    @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  filename                           String
+  inputText                          String
+  interviewQuestionEvaluationDetails InterviewQuestionEvaluationDetail[]
+  createdAt                          DateTime                            @default(now())
+}
+
+// 各質問の評価
+model InterviewQuestionEvaluationDetail {
+  id         String            @id @default(cuid())
+  questionId String
+  question   InterviewQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  score      Int
+  reason     String
+  createdAt  DateTime          @default(now())
+}
+
+enum Industry {
+  Engineering
+  Business
+}
+
+enum BusinessType {
+  SES
+  SIER
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }

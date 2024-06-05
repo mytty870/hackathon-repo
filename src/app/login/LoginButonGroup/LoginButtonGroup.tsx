@@ -8,8 +8,7 @@ export const LoginButtonGroup = () => {
   return (
     <>
       <Button
-        className="mb-3 flex w-full items-center justify-center gap-2 rounded border border-gray-300 py-2"
-        color="primary"
+        className="mb-3 flex w-full items-center justify-center gap-2 rounded border border-gray-400 bg-white py-2"
         onClick={() => signIn('google', { callbackUrl: callbackUrl })}
         startContent={
           <svg viewBox="0 0 533.5 544.3" height="18" width="18">
@@ -37,7 +36,6 @@ export const LoginButtonGroup = () => {
       </Button>
       <Button
         className="mb-3 flex w-full items-center justify-center gap-3 rounded border border-gray-300 py-2"
-        color="primary"
         startContent={
           <svg
             xmlns="http://www.w3.org/2000/svg"

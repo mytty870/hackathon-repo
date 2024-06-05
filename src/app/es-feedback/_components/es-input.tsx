@@ -88,15 +88,15 @@ export const EsInput: React.FC = () => {
 
   return (
     <>
-      <h2 className="p-3 text-center text-3xl">ES添削</h2>
+      <h2 className="p-3 text-center text-4xl underline">ES添削</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center space-y-4"
+        className="flex flex-col items-center justify-center space-y-4 p-4"
       >
-        <div className="space-y-4 rounded-lg border border-gray-300 bg-white p-3 text-center shadow-md md:w-[70%]">
+        <div className="space-y-4 bg-white p-3 text-center text-xl md:w-[70%]">
           {questionList.map(({ id, question, qNum }) => (
             <div key={id} className="space-y-4">
-              <h3 className="text-xl">質問{qNum}</h3>
+              <h3 className="text-2xl">質問{qNum}</h3>
               <p>{question}</p>
               <div className="mb-4 items-center justify-center">
                 <Controller

@@ -89,15 +89,15 @@ model InterviewQuestionEvaluationDetail {
   createdAt  DateTime          @default(now())
 }
 
-enum Industry {
-  Engineering
-  Business
-}
+// enum Industry {
+//   Engineering
+//   Business
+// }
 
-enum BusinessType {
-  SES
-  SIER
-}
+// enum BusinessType {
+//   SES
+//   SIER
+// }
 
 model VerificationToken {
   identifier String

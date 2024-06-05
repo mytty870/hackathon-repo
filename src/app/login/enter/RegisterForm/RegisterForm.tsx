@@ -35,7 +35,7 @@ export const RegisterForm = () => {
   })
   const router = useRouter()
 
-  const onSubmit: SubmitHandler<FormData> = async data => {
+  const onSubmit: SubmitHandler<FormData> = async values => {
     setLoading(true)
     // フォームデータをサーバーに送信する処理をここに追加
 
@@ -45,7 +45,7 @@ export const RegisterForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(values),
       })
 
       if (response.ok) {

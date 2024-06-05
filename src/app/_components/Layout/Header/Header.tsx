@@ -12,11 +12,15 @@ import { NavLink } from './NavLink'
 import { useState } from 'react'
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
+import { usePathname } from 'next/navigation'
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const { data: session } = useSession()
+  const pathName = usePathname()
+
+  const isLoginPath = pathName === '/login' || pathName === '/login/enter'
 
   const handleLinkClick = () => {
     setIsMenuOpen(false)
@@ -51,37 +55,47 @@ export const Header = () => {
               ログアウト
             </Button>
           ) : (
-            <Link href="/login">
-              <Button color="primary">ログイン</Button>
-            </Link>
+            <>
+              {isLoginPath ? null : (
+                <Link href="/login">
+                  <Button color="primary">ログイン</Button>
+                </Link>
+              )}
+            </>
           )}
-          <NavbarContent justify="end">
-            <NavbarMenuToggle
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              className="sm:hidden"
-            />
-          </NavbarContent>
+          {!isLoginPath && (
+            <NavbarContent justify="end">
+              <NavbarMenuToggle
+                aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                className="sm:hidden"
+              />
+            </NavbarContent>
+          )}
         </div>
-        <div
-          className={`mt-2 hidden w-full border-t-3 border-blue-500 sm:block`}
-        >
-          <div className="container mx-auto flex justify-center gap-12 px-4 py-2">
-            {serviceItems.map(item => (
-              <NavLink key={item.name} href={item.href}>
-                {item.name}
-              </NavLink>
-            ))}
+        {!isLoginPath && (
+          <div
+            className={`mt-2 hidden w-full border-t-3 border-blue-500 sm:block`}
+          >
+            <div className="container mx-auto flex justify-center gap-12 px-4 py-2">
+              {serviceItems.map(item => (
+                <NavLink key={item.name} href={item.href}>
+                  {item.name}
+                </NavLink>
+              ))}
+            </div>
           </div>
-        </div>
-        <NavbarMenu>
-          {serviceItems.map(item => (
-            <NavbarMenuItem className="mb-4" key={`${item.name}`}>
-              <NavLink href={item.href} onClick={handleLinkClick}>
-                {item.name}
-              </NavLink>
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
+        )}
+        {!isLoginPath && (
+          <NavbarMenu>
+            {serviceItems.map(item => (
+              <NavbarMenuItem className="mb-4" key={`${item.name}`}>
+                <NavLink href={item.href} onClick={handleLinkClick}>
+                  {item.name}
+                </NavLink>
+              </NavbarMenuItem>
+            ))}
+          </NavbarMenu>
+        )}
       </Navbar>
     </>
   )

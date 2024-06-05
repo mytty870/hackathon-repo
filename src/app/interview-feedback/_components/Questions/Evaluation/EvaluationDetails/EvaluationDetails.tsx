@@ -37,9 +37,9 @@ const EvaluationDetails: React.FC<EvaluationDetailsProps> = ({
   return (
     <div>
       <h3>評価詳細 ({evaluationResult.filename})</h3>
-      <ul>
+      <ul className="m-0 list-none p-0">
         {evaluations.map((evaluation, index) => (
-          <li key={index}>
+          <li key={index} className="my-2 border-b border-gray-300 py-2">
             <strong>評価{index + 1}:</strong> スコア: {evaluation.score}, 理由:{' '}
             {evaluation.reason}
           </li>

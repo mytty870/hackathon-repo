@@ -1,12 +1,14 @@
 import { getServerSession } from '@/lib/auth'
 import { redirect } from 'next/navigation'
-import { LoginButtonGroup } from './LoginButonGroup'
+import { LoginButtonGroup } from './_components/LoginButonGroup'
 
 export default async function Page() {
   const session = await getServerSession()
 
-  if (session?.user) {
-    // 仮でルートにリダイレクトするように設定している
+  if (session?.user && session.user.userName) {
+    /**
+     * 仮でルートにリダイレクトするように設定している
+     */
     redirect('/interview-feedback')
   }
   return (

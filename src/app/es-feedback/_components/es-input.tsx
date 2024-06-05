@@ -9,15 +9,15 @@ const schema = z.object({
   answer1: z
     .string()
     .min(1, '入力は必須です')
-    .max(1000, '400文字以内で入力してください'),
+    .max(400, '400文字以内で入力してください'),
   answer2: z
     .string()
     .min(1, '入力は必須です')
-    .max(1000, '400文字以内で入力してください'),
+    .max(400, '400文字以内で入力してください'),
   answer3: z
     .string()
     .min(1, '入力は必須です')
-    .max(1000, '400文字以内で入力してください'),
+    .max(400, '400文字以内で入力してください'),
 })
 
 type FormValues = z.infer<typeof schema>

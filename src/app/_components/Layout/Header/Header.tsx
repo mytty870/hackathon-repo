@@ -11,15 +11,12 @@ import {
 import { NavLink } from './NavLink'
 import { useState } from 'react'
 import Link from 'next/link'
-import { signOut } from 'next-auth/react'
-import { Session } from 'next-auth'
+import { signOut, useSession } from 'next-auth/react'
 
-type HeaderProps = {
-  session: Session | null
-}
-
-export const Header = ({ session }: HeaderProps) => {
+export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const { data: session } = useSession()
 
   const handleLinkClick = () => {
     setIsMenuOpen(false)
@@ -46,7 +43,7 @@ export const Header = ({ session }: HeaderProps) => {
           <div className="flex items-center justify-between space-x-4">
             <h1 className="text-3xl font-semibold text-blue-600">就活AI</h1>
           </div>
-          {session && session.user ? (
+          {session && session.user && session.user.userName ? (
             <Button
               color="danger"
               onClick={() => signOut({ callbackUrl: 'http://localhost:3000' })}

@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/react'
 import React from 'react'
 
 export const LoginButtonGroup = () => {
-  const callbackUrl = 'http://localhost:3000/es-feedback'
+  const callbackUrl = 'http://localhost:3000/login/enter'
   return (
     <>
       <Button

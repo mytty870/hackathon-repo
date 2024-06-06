@@ -29,25 +29,21 @@ export const InterviewMainvisal = () => {
       <div className="mb-16 flex flex-col gap-8 md:flex-row">
         <div className="flex-1 space-y-8">
           <div className="text-left">
-            <h3 className="text-md mb-2 font-medium md:text-lg">■口癖の評価</h3>
+            <h3 className="mb-2 font-medium md:text-lg">■口癖の評価</h3>
             <p>
               よくある質問に音声を分析し、適切なフィードバックを提供します。
             </p>
           </div>
           <div className="text-left">
-            <h3 className="text-md mb-2 font-medium md:text-lg">
-              ■一人称の統一
-            </h3>
+            <h3 className="mb-2 font-medium md:text-lg">■一人称の統一</h3>
             <p>一人称の使い方が一貫しているかを評価し、改善点を指摘します。</p>
           </div>
           <div className="text-left">
-            <h3 className="text-md mb-2 font-medium md:text-lg">■敬語の使用</h3>
+            <h3 className="mb-2 font-medium md:text-lg">■敬語の使用</h3>
             <p>敬語の使い方を評価し、適切な使い方をフィードバックします。</p>
           </div>
           <div className="text-left">
-            <h3 className="text-md mb-2 font-medium md:text-lg">
-              ■論理性の評価
-            </h3>
+            <h3 className="mb-2 font-medium md:text-lg">■論理性の評価</h3>
             <p>回答の論理性を評価し、論理的な話し方をアドバイスします。</p>
           </div>
           <div className="text-left">
@@ -66,7 +62,9 @@ export const InterviewMainvisal = () => {
       </div>
       <div className="text-center">
         <Link href="/interview/practice">
-          <Button color="secondary">AIによる面接対策を試す</Button>
+          <Button className="h-[70px] bg-blue-400 px-8 py-4 text-lg text-white hover:bg-blue-600">
+            AIによる面接対策を試す
+          </Button>
         </Link>
       </div>
     </div>

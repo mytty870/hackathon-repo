@@ -98,7 +98,7 @@ export const Question = ({
       if (!saveResponse.ok) {
         throw new Error('Failed to save evaluation result')
       } else {
-        router.push(`/practice/feedback/${saveResult.id}`)
+        router.push(`/interview/practice/feedback/${saveResult.id}`)
       }
 
       // console.log(saveResult.id)

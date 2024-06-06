@@ -3,7 +3,7 @@ export default async function Home() {
   return (
     <>
       <div>ホーム</div>
-      <Link href="/practice">インタビューページへ</Link>
+      <Link href="/interview">面接ページへ</Link>
     </>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { Button, Avatar } from '@nextui-org/react'
+import Link from 'next/link'
 
 export const InterviewMainvisal = () => {
   return (
@@ -64,7 +65,9 @@ export const InterviewMainvisal = () => {
         </div>
       </div>
       <div className="text-center">
-        <Button color="secondary">AIによる面接対策を試す</Button>
+        <Link href="/interview/practice">
+          <Button color="secondary">AIによる面接対策を試す</Button>
+        </Link>
       </div>
     </div>
   )

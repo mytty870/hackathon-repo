@@ -4,6 +4,7 @@ import { EvaluationRadarChart } from './EvaluationRaderChart'
 import { EvaluationDetails } from './EvaluationDetails'
 
 import { Accordion, AccordionItem } from '@nextui-org/react'
+import TotalScoreRadarChart from './TotalScoreRadarChart/TotalScoreRadarChart'
 
 function transformData(interviewSession: any) {
   const transformedData = {
@@ -12,6 +13,37 @@ function transformData(interviewSession: any) {
     industry: interviewSession.industry,
     businessType: interviewSession.businessType,
     createdAt: interviewSession.createdAt,
+    summary: interviewSession.summary,
+    evaluation1TotalScore:
+      interviewSession.question1Evaluation1Score +
+      interviewSession.question2Evaluation1Score +
+      interviewSession.question3Evaluation1Score +
+      interviewSession.question4Evaluation1Score +
+      interviewSession.question5Evaluation1Score,
+    evaluation2TotalScore:
+      interviewSession.question1Evaluation2Score +
+      interviewSession.question2Evaluation2Score +
+      interviewSession.question3Evaluation2Score +
+      interviewSession.question4Evaluation2Score +
+      interviewSession.question5Evaluation2Score,
+    evaluation3TotalScore:
+      interviewSession.question1Evaluation3Score +
+      interviewSession.question2Evaluation3Score +
+      interviewSession.question3Evaluation3Score +
+      interviewSession.question4Evaluation3Score +
+      interviewSession.question5Evaluation3Score,
+    evaluation4TotalScore:
+      interviewSession.question1Evaluation4Score +
+      interviewSession.question2Evaluation4Score +
+      interviewSession.question3Evaluation4Score +
+      interviewSession.question4Evaluation4Score +
+      interviewSession.question5Evaluation4Score,
+    evaluation5TotalScore:
+      interviewSession.question1Evaluation5Score +
+      interviewSession.question2Evaluation5Score +
+      interviewSession.question3Evaluation5Score +
+      interviewSession.question4Evaluation5Score +
+      interviewSession.question5Evaluation5Score,
     questions: [
       {
         inputText: interviewSession.question1InputText,
@@ -213,20 +245,36 @@ export const Evaluation = ({ interviewSession }: EvaluationProps) => {
 
   const evaluationResults = transformedData.questions
 
+  const totalScore = transformedData.questions.reduce((acc, question) => {
+    const questionTotal = question.evaluations.reduce(
+      (sum, evaluation) => sum + evaluation.score,
+      0,
+    )
+    return acc + questionTotal
+  }, 0)
+
+  const evaluationTotalScores = [
+    transformedData.evaluation1TotalScore,
+    transformedData.evaluation2TotalScore,
+    transformedData.evaluation3TotalScore,
+    transformedData.evaluation4TotalScore,
+    transformedData.evaluation5TotalScore,
+  ]
+
+  console.log(totalScore)
+
   return (
     <div>
       <h2>総合スコア</h2>
-      {/* <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-        <div style={{ flex: 1 }}>
-          <h1 className="p-5 text-7xl">100</h1>
-          <p className="p-5">
-            無意識の発声や特定のフレーズが多く、一貫した意思の表現が見られないため、評価できませんでした。適切な発声練習や言葉遣いの訓練が必要です。
-          </p>
+      <div className="flex flex-wrap items-start">
+        <div className="order-1 w-full md:order-1 md:w-1/2">
+          <h1 className="p-5 text-7xl">{totalScore}</h1>
+          <p className="p-5">{transformedData.summary}</p>
         </div>
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+        <div className="order-2 flex w-full justify-center p-3 md:order-2 md:w-1/2">
           <TotalScoreRadarChart evaluationResults={evaluationResults} />
         </div>
-      </div> */}
+      </div>
 
       <Accordion>
         {evaluationResults.map((result, index) => (
@@ -235,15 +283,13 @@ export const Evaluation = ({ interviewSession }: EvaluationProps) => {
             aria-label="詳細"
             title={`質問 ${index + 1}の詳細`}
           >
-            <div key={index} style={{ marginBottom: '20px' }}>
-              <h2>質問{index + 1}の結果</h2>
-              <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-                <div style={{ flex: 1 }}>
+            <div key={index} className="mb-5">
+              <h2 className="text-lg font-semibold">質問{index + 1}の結果</h2>
+              <div className="mt-3 flex flex-wrap">
+                <div className="order-2 w-full p-2 md:order-1 md:w-1/2">
                   <EvaluationDetails evaluationResult={result.evaluations} />
                 </div>
-                <div
-                  style={{ flex: 1, display: 'flex', justifyContent: 'center' }}
-                >
+                <div className="order-1 flex w-full justify-center p-2 md:order-2 md:w-1/2">
                   <EvaluationRadarChart evaluationResult={result} />
                 </div>
               </div>

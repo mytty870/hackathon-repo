@@ -18,6 +18,7 @@ export async function POST(request: NextResponse) {
       userId: userId,
       industry: '',
       businessType: '',
+      summary: sessionData[5].reason,
       question1InputText: sessionData[0].input_text,
       question1Evaluation1Score: sessionData[0].response.evaluation1.score,
       question1Evaluation1Reason: sessionData[0].response.evaluation1.reason,

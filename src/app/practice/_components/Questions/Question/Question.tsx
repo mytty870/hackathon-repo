@@ -75,12 +75,14 @@ export const Question = ({
     // })
 
     try {
-      //   const response = await fetch('http://localhost:8080/upload/', {
-      //             method: 'POST',
-      //             body: formData,
-      //           });
+      // const response = await fetch('http://localhost:8080/upload/', {
+      //           method: 'POST',
+      //           body: formData,
+      //         });
 
-      //   const result = await response.json()
+      // const result = await response.json()
+
+      // console.log(result)
 
       const saveResponse = await fetch('/api/interview-evaluation', {
         method: 'POST',

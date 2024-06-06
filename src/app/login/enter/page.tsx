@@ -12,5 +12,10 @@ export default async function Page() {
     redirect('/')
   }
 
-  return <RegisterForm />
+  return (
+    <>
+      <h2 className="p-3 text-center text-2xl">プロフィールの更新</h2>
+      <RegisterForm />
+    </>
+  )
 }

@@ -60,67 +60,78 @@ export const RegisterForm = () => {
       }
     } catch (error) {
       console.error('An unexpected error occurred:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
   const isSubmitDisabled = !isDirty || !isValid
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        {...register('userName')}
-        placeholder="ユーザー名"
-        label="ユーザー名"
-        labelPlacement="outside"
-      />
-      {errors.userName && (
-        <span className="text-red-500">{errors.userName.message}</span>
-      )}
-      <Spacer y={1.5} />
-      <Select
-        {...register('industry')}
-        label="業種"
-        placeholder="業種を選択して下さい"
-        labelPlacement="outside"
-        disableSelectorIconRotation
-        selectorIcon={
-          <svg
-            aria-hidden="true"
-            fill="none"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.5"
-            viewBox="0 0 24 24"
-            width="1em"
+    <div className="flex items-center justify-center p-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full max-w-md rounded-lg border border-gray-300 bg-white p-8 shadow-md"
+      >
+        <Input
+          {...register('userName')}
+          placeholder="ユーザー名"
+          label="ユーザー名"
+          labelPlacement="outside"
+        />
+        {errors.userName && (
+          <span className="text-red-500">{errors.userName.message}</span>
+        )}
+        <Spacer y={1.5} />
+        <Select
+          {...register('industry')}
+          label="興味がある業種"
+          placeholder="業種を選択して下さい"
+          labelPlacement="outside"
+          disableSelectorIconRotation
+          selectorIcon={
+            <svg
+              aria-hidden="true"
+              fill="none"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+              viewBox="0 0 24 24"
+              width="1em"
+            >
+              <path d="M0 0h24v24H0z" fill="none" stroke="none" />
+              <path d="M8 9l4 -4l4 4" />
+              <path d="M16 15l-4 4l-4 -4" />
+            </svg>
+          }
+        >
+          {industryItem.map(item => (
+            <SelectItem value={item.key} key={item.key}>
+              {item.label}
+            </SelectItem>
+          ))}
+        </Select>
+        {errors.industry && (
+          <span className="text-red-500">{errors.industry.message}</span>
+        )}
+        <Spacer y={3.5} />
+        <div style={{ textAlign: 'right' }}>
+          <Button
+            isLoading={loading}
+            isDisabled={isSubmitDisabled}
+            type="submit"
+            color="primary"
           >
-            <path d="M0 0h24v24H0z" fill="none" stroke="none" />
-            <path d="M8 9l4 -4l4 4" />
-            <path d="M16 15l-4 4l-4 -4" />
-          </svg>
-        }
-      >
-        {industryItem.map(item => (
-          <SelectItem value={item.key} key={item.key}>
-            {item.label}
-          </SelectItem>
-        ))}
-      </Select>
-      {errors.industry && (
-        <span className="text-red-500">{errors.industry.message}</span>
-      )}
-      <Spacer y={1.5} />
-      <Button
-        isLoading={loading}
-        isDisabled={isSubmitDisabled}
-        type="submit"
-        color="primary"
-      >
-        登録
-      </Button>
-    </form>
+            更新
+          </Button>
+        </div>
+
+        <Spacer y={0.5} />
+      </form>
+    </div>
   )
 }

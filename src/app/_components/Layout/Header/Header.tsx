@@ -38,8 +38,6 @@ export const Header = ({ session }) => {
   const serviceItems = [
     { name: '面接練習', href: '/interview' },
     { name: 'ES添削', href: '/es-feedback' },
-    { name: 'アドバイザー紹介', href: '/advisors' },
-    { name: '内定者の声', href: '/voices' },
   ]
 
   return (
@@ -124,13 +122,17 @@ export const Header = ({ session }) => {
               </NavbarMenuItem>
             ))}
             <NavbarMenuItem className="py-2 border-t-2">
-              <NavLink href="aa" onClick={handleLinkClick}>
+              <NavLink href="mypage" onClick={handleLinkClick}>
                 マイページ
               </NavLink>
             </NavbarMenuItem>
             {session && session.user && session.user.userName ? (
               <NavbarMenuItem className="py-2 border-t-2">
-                <NavLink href="#" onClick={handleSignOut}>
+                <NavLink
+                  href="#"
+                  className="text-red-500"
+                  onClick={handleSignOut}
+                >
                   ログアウト
                 </NavLink>
               </NavbarMenuItem>

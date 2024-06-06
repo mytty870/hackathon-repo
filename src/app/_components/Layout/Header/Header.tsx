@@ -27,7 +27,7 @@ export const Header = () => {
   }
 
   const serviceItems = [
-    { name: '面接練習', href: '/interview-feedback' },
+    { name: '面接練習', href: '/practice' },
     { name: 'ES添削', href: '/es-feedback' },
     { name: 'アドバイザー紹介', href: '/advisors' },
     { name: '内定者の声', href: '/voices' },

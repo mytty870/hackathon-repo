@@ -9,7 +9,7 @@ export default async function Page() {
     /**
      * 仮でルートにリダイレクトするように設定している
      */
-    redirect('/interview-feedback')
+    redirect('/practice')
   }
   return (
     <div className="flex items-center justify-center">

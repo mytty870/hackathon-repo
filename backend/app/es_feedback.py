@@ -80,5 +80,4 @@ def es_feedback(text) -> str:
     except json.JSONDecodeError as e:
         print("json形式が正しくないのでjsonに変換する関数を通します。")
         return txt_to_json(response_text)
-        return None
     

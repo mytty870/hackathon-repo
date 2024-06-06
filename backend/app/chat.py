@@ -3,6 +3,7 @@ import json
 from dotenv import load_dotenv, find_dotenv
 import os
 from os.path import join, dirname
+from txt_to_json import txt_to_json
 
 
 def chat(text) -> str:
@@ -82,5 +83,6 @@ def chat(text) -> str:
     except json.JSONDecodeError as e:
         print("Error: Response is not in JSON format")
         print("Details:", e)
-        return None
+        return txt_to_json(response_text)
+        
     

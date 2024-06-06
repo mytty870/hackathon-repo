@@ -36,6 +36,7 @@ export const LoginButtonGroup = () => {
       </Button>
       <Button
         className="mb-3 flex w-full items-center justify-center gap-3 rounded border border-gray-300 py-2"
+        onClick={() => signIn('github', { callbackUrl: callbackUrl })}
         startContent={
           <svg
             xmlns="http://www.w3.org/2000/svg"

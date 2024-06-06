@@ -8,6 +8,7 @@ import openai
 from chat import chat
 from whisper import voice_to_text
 from es_feedback import es_feedback
+from summary import summary
 from dotenv import load_dotenv, find_dotenv
 import os
 from os.path import join, dirname
@@ -55,7 +56,22 @@ async def upload_audio(files: List[UploadFile] = File(...)):
     with ProcessPoolExecutor() as executor:
         feedback_list = list(executor.map(chat, text_list))
     results = [{"filename": files[i].filename, "input_text": text_list[i], "response": feedback_list[i]} for i in range(len(video_list))]
+
+    # ここから添削まとめの指示
+    reasons = []
+    for item in results:
+        response = item['response']
+        for evaluation in response.values():
+            reasons.append(evaluation['reason'])
+
+    # 関数を通す
+    summary_data = summary(str(reasons))
+    # 結果の出力
+    results.append(summary_data)
     return json.dumps(results, ensure_ascii=False, indent=4)
+
+
+
 
 
 @app.post("/es_feedback/")

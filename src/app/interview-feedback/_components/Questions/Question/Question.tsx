@@ -1,6 +1,7 @@
 import { Button } from '@nextui-org/react'
 import { Recorder } from '../Recorder'
 import { useState } from 'react'
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt'
 
 type EvaluationDetail = {
   score: number
@@ -189,7 +190,7 @@ export const Question = ({
 
   return (
     <div className="space-y-8">
-      <h2 className="text-2xl">質問{questionNum + 1}</h2>
+      <h2 className="mb-4 text-2xl">質問{questionNum + 1}</h2>
       <div>{questionnaire[questionNum]}</div>
       <Recorder
         setRecordings={setRecordings}
@@ -210,14 +211,16 @@ export const Question = ({
             {isLoading ? '評価中' : '評価する'}
           </Button>
         ) : (
-          <Button
-            color="secondary"
-            onClick={handleNextQuestion}
-            isDisabled={!isRecorded}
-            className=""
-          >
-            {questionNum + 2}問目
-          </Button>
+          <div className="flex items-center justify-center">
+            <Button
+              // color="secondary"
+              onClick={handleNextQuestion}
+              isDisabled={!isRecorded}
+              className="flex size-12 items-center justify-center rounded-full border-2 border-gray-400 hover:border-gray-600 focus:outline-none"
+              endContent={<ArrowRightAltIcon />}
+              variant="light"
+            />
+          </div>
         )}
       </div>
     </div>

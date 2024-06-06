@@ -1,7 +1,12 @@
+/* eslint-disable */
 'use client'
 
 import {
   Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Navbar,
   NavbarContent,
   NavbarMenu,
@@ -11,19 +16,23 @@ import {
 import { NavLink } from './NavLink'
 import { useState } from 'react'
 import Link from 'next/link'
-import { signOut, useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 
-export const Header = () => {
+export const Header = ({ session }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const { data: session } = useSession()
   const pathName = usePathname()
 
   const isLoginPath = pathName === '/login' || pathName === '/login/enter'
 
   const handleLinkClick = () => {
     setIsMenuOpen(false)
+  }
+
+  const handleSignOut = () => {
+    setIsMenuOpen(false)
+    signOut({ callbackUrl: 'http://localhost:3000' })
   }
 
   const serviceItems = [
@@ -44,33 +53,53 @@ export const Header = () => {
         onMenuOpenChange={setIsMenuOpen}
       >
         <div className="container mx-auto flex items-center justify-between px-4 py-2">
-          <div className="flex items-center justify-between space-x-4">
-            <h1 className="text-3xl font-semibold text-blue-600">就活AI</h1>
-          </div>
-          {session && session.user && session.user.userName ? (
-            <Button
-              color="danger"
-              onClick={() => signOut({ callbackUrl: 'http://localhost:3000' })}
-            >
-              ログアウト
-            </Button>
-          ) : (
-            <>
-              {isLoginPath ? null : (
+          <NavbarContent>
+            <h1 className="text-3xl font-semibold text-blue-600">
+              <Link href="/">就活AI</Link>
+            </h1>
+          </NavbarContent>
+          <NavbarContent justify="end">
+            {session && session.user && session.user.userName ? (
+              <Dropdown className="hidden sm:block">
+                <DropdownTrigger>
+                  <Button
+                    color="primary"
+                    disableRipple={true}
+                    className="hidden sm:block"
+                  >
+                    メニュー
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="Static Actions">
+                  <DropdownItem key="new" href="/mypage">
+                    マイページ
+                  </DropdownItem>
+                  <DropdownItem
+                    key="delete"
+                    className="text-danger"
+                    color="danger"
+                    onClick={handleSignOut}
+                  >
+                    ログアウト
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            ) : (
+              !isLoginPath && (
                 <Link href="/login">
-                  <Button color="primary">ログイン</Button>
+                  <Button color="primary" className="hidden sm:block">
+                    ログイン
+                  </Button>
                 </Link>
-              )}
-            </>
-          )}
-          {!isLoginPath && (
-            <NavbarContent justify="end">
+              )
+            )}
+            {!isLoginPath && (
               <NavbarMenuToggle
                 aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                 className="sm:hidden"
               />
-            </NavbarContent>
-          )}
+            )}
+          </NavbarContent>
         </div>
         {!isLoginPath && (
           <div
@@ -88,12 +117,30 @@ export const Header = () => {
         {!isLoginPath && (
           <NavbarMenu>
             {serviceItems.map(item => (
-              <NavbarMenuItem className="mb-4" key={`${item.name}`}>
+              <NavbarMenuItem className="py-2" key={`${item.name}`}>
                 <NavLink href={item.href} onClick={handleLinkClick}>
                   {item.name}
                 </NavLink>
               </NavbarMenuItem>
             ))}
+            <NavbarMenuItem className="py-2 border-t-2">
+              <NavLink href="aa" onClick={handleLinkClick}>
+                マイページ
+              </NavLink>
+            </NavbarMenuItem>
+            {session && session.user && session.user.userName ? (
+              <NavbarMenuItem className="py-2 border-t-2">
+                <NavLink href="#" onClick={handleSignOut}>
+                  ログアウト
+                </NavLink>
+              </NavbarMenuItem>
+            ) : (
+              <NavbarMenuItem className="py-2 border-t-2">
+                <NavLink href="/login" onClick={handleLinkClick}>
+                  ログイン
+                </NavLink>
+              </NavbarMenuItem>
+            )}
           </NavbarMenu>
         )}
       </Navbar>

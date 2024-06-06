@@ -1,24 +1,24 @@
-import { getServerSession } from '@/lib/auth'
+// import { getServerSession } from '@/lib/auth'
 import Link from 'next/link'
-import { prisma } from '@/lib/prisma'
+// import { prisma } from '@/lib/prisma'
 
 export default async function Home() {
-  const session = await getServerSession()
+  // const session = await getServerSession()
 
-  const user = await prisma.user.findFirst({
-    where: {
-      id: session?.user.id ?? '',
-    },
-    select: {
-      userName: true,
-      industry: true,
-    },
-  })
+  // const user = await prisma.user.findFirst({
+  //   where: {
+  //     id: session?.user.id ?? '',
+  //   },
+  //   select: {
+  //     userName: true,
+  //     industry: true,
+  //   },
+  // })
 
   return (
     <>
       <div>ホーム</div>
-      {user?.userName && (
+      {/* {user?.userName && (
         <div>
           <div>ユーザー名: {user.userName}</div>
         </div>
@@ -27,7 +27,7 @@ export default async function Home() {
         <div>
           <div>業界: {user.industry}</div>
         </div>
-      )}
+      )} */}
       <Link href="/interview-feedback">インタビューページへ</Link>
     </>
   )

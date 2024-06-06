@@ -5,16 +5,5 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:tailwindcss/recommended",
     "prettier"
-  ],
-  "rules": {
-    "no-console": [
-      "error",
-      {
-        "allow": [
-          "warn",
-          "error"
-        ]
-      }
-    ]
-  }
+  ]
 }

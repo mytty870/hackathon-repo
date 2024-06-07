@@ -1,9 +1,8 @@
-import Link from 'next/link'
+import Top from './_components/top'
 export default async function Home() {
   return (
     <>
-      <div>ホーム</div>
-      <Link href="/interview">面接ページへ</Link>
+      <Top />
     </>
   )
 }

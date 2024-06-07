@@ -6,9 +6,9 @@ import React from 'react'
 export const LoginButtonGroup = () => {
   const callbackUrl = 'http://localhost:3000/login/enter'
   return (
-    <>
+    <div className="flex flex-col gap-6">
       <Button
-        className="mb-3 flex w-full items-center justify-center gap-2 rounded border border-gray-400 bg-white py-2"
+        className="flex w-full items-center justify-center gap-2 rounded border border-gray-400 bg-white py-2"
         onClick={() => signIn('google', { callbackUrl: callbackUrl })}
         startContent={
           <svg viewBox="0 0 533.5 544.3" height="18" width="18">
@@ -53,6 +53,6 @@ export const LoginButtonGroup = () => {
       >
         githubで登録
       </Button>
-    </>
+    </div>
   )
 }

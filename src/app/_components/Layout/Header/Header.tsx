@@ -44,7 +44,7 @@ export const Header = ({ session }) => {
   return (
     <>
       <Navbar
-        className="mb-6 bg-white py-2 shadow-lg sm:py-0"
+        className="bg-white py-2 shadow-lg sm:py-0"
         classNames={{
           wrapper: 'flex-col h-auto justify-start gap-1 px-0 max-w-full',
         }}

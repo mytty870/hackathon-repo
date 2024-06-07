@@ -13,12 +13,31 @@ export async function POST(request: NextResponse) {
 
   const sessionData = await request.json()
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const calculateTotalScore = data => {
+    let totalScore = 0
+    const iterations = Math.min(5, data.length) // 配列の長さが5より短い場合に対応
+
+    for (let i = 0; i < iterations; i++) {
+      totalScore += data[i].response.evaluation1.score
+      totalScore += data[i].response.evaluation2.score
+      totalScore += data[i].response.evaluation3.score
+      totalScore += data[i].response.evaluation4.score
+      totalScore += data[i].response.evaluation5.score
+    }
+
+    return totalScore
+  }
+
+  const totalScore = calculateTotalScore(sessionData)
+
   const interviewSession = await prisma.interviewSession.create({
     data: {
       userId: userId,
       industry: '',
       businessType: '',
       summary: sessionData[5].reason,
+      totalScore: totalScore,
       question1InputText: sessionData[0].input_text,
       question1Evaluation1Score: sessionData[0].response.evaluation1.score,
       question1Evaluation1Reason: sessionData[0].response.evaluation1.reason,

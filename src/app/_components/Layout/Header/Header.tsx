@@ -37,6 +37,7 @@ export const Header = ({ session }) => {
 
   const serviceItems = [
     { name: '面接練習', href: '/interview' },
+    { name: '面接ランキング', href: '/interview/ranking' },
     { name: 'ES添削', href: '/es-feedback' },
   ]
 

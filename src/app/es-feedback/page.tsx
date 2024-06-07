@@ -1,10 +1,8 @@
-import { EsInput } from './_components/es-input'
-import { Overview } from './_components/overview'
+import { EsForm } from './_components/EsForm'
 export default function Page() {
   return (
     <>
-      <Overview />
-      <EsInput />
+      <EsForm />
     </>
   )
 }

@@ -25,7 +25,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <Evaluation interviewSession={interviewSession} />
-      <div>{interviewSession.id}</div>
     </>
   )
 }

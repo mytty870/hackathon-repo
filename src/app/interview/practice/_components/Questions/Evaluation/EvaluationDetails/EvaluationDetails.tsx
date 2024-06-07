@@ -34,13 +34,21 @@ const EvaluationDetails: React.FC<EvaluationDetailsProps> = ({
     evaluationResult.response.evaluation5,
   ]
 
+  const labels = [
+    '口癖',
+    '一人称の統一',
+    '敬語の使い方',
+    '論理性',
+    '言葉の使い方',
+  ]
+
   return (
     <div>
       <h3>評価詳細 ({evaluationResult.filename})</h3>
       <ul className="m-0 list-none p-0">
         {evaluations.map((evaluation, index) => (
           <li key={index} className="my-2 border-b border-gray-300 py-2">
-            <strong>評価{index + 1}:</strong> スコア: {evaluation.score}, 理由:{' '}
+            <strong>{labels[index]}:</strong> スコア: {evaluation.score} , 理由:{' '}
             {evaluation.reason}
           </li>
         ))}

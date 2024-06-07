@@ -46,6 +46,7 @@ CREATE TABLE "InterviewSession" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "summary" TEXT,
+    "totalScore" INTEGER,
     "industry" TEXT,
     "businessType" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

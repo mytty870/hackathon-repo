@@ -53,8 +53,8 @@ export const Header = ({ session }) => {
       >
         <div className="container mx-auto flex items-center justify-between px-4 py-2">
           <NavbarContent>
-            <h1 className="text-3xl font-semibold text-blue-600">
-              <Link href="/">就活AI</Link>
+            <h1 className="text-3xl font-semibold text-blue-600 tracking-tight">
+              <Link href="/">就活支援しまっせ！</Link>
             </h1>
           </NavbarContent>
           <NavbarContent justify="end">

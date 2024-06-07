@@ -303,7 +303,7 @@ export const Evaluation = ({ interviewSession }: EvaluationProps) => {
         </div>
       </div>
       <div className="flex flex-wrap justify-center mt-5 space-y-2 md:space-y-0 md:space-x-2">
-        <Link href="/ranking" className="w-full md:w-auto px-9">
+        <Link href="/interview/ranking" className="w-full md:w-auto px-9">
           <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
             ランキングに移動する
           </Button>

@@ -264,10 +264,10 @@ export const Evaluation = ({ interviewSession }: EvaluationProps) => {
   console.log(totalScore)
 
   return (
-    <div>
-      <div className="flex flex-wrap justify-center">
-        <div className="w-full md:w-[70%] p-1">
-          <h2 className="text-center">総合スコア</h2>
+    <div className="bg-gray-100">
+      <div className="flex flex-wrap justify-center bg-gray-100">
+        <div className="w-full md:w-[70%] p-1 bg-white md:my-10">
+          <h2 className="text-center text-3xl mt-3">総合スコア</h2>
           <div className="flex flex-wrap items-start">
             <div className="order-1 w-full md:order-1 md:w-1/2 p-4">
               <h1 className="p-5 text-7xl text-center">{totalScore}点</h1>
@@ -300,24 +300,24 @@ export const Evaluation = ({ interviewSession }: EvaluationProps) => {
               </AccordionItem>
             ))}
           </Accordion>
+          <div className="flex flex-wrap justify-center mt-8 space-y-2 md:space-y-0 md:space-x-2 mb-4">
+            <Link href="/ranking" className="w-full md:w-auto px-9">
+              <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
+                ランキングに移動する
+              </Button>
+            </Link>
+            <Link href="/mypage" className="w-full md:w-auto px-9">
+              <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
+                過去の結果を確認する
+              </Button>
+            </Link>
+            <Link href="/interview" className="w-full md:w-auto px-9">
+              <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
+                再度面接練習をする
+              </Button>
+            </Link>
+          </div>
         </div>
-      </div>
-      <div className="flex flex-wrap justify-center mt-5 space-y-2 md:space-y-0 md:space-x-2">
-        <Link href="/interview/ranking" className="w-full md:w-auto px-9">
-          <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
-            ランキングに移動する
-          </Button>
-        </Link>
-        <Link href="/mypage" className="w-full md:w-auto px-9">
-          <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
-            過去の結果を確認する
-          </Button>
-        </Link>
-        <Link href="/interview" className="w-full md:w-auto px-9">
-          <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
-            再度面接練習をする
-          </Button>
-        </Link>
       </div>
     </div>
   )

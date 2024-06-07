@@ -21,7 +21,13 @@ ChartJS.register(
 )
 
 export const TotalEvaluationRadarChart = ({ evaluationResults }) => {
-  const labels = ['評価1', '評価2', '評価3', '評価4', '評価5']
+  const labels = [
+    '口癖',
+    '一人称の統一',
+    '敬語の使い方',
+    '論理性',
+    '言葉の使い方',
+  ]
 
   // 各評価のスコアを合計
 
@@ -46,6 +52,12 @@ export const TotalEvaluationRadarChart = ({ evaluationResults }) => {
         max: 100,
         ticks: {
           beginAtZero: true,
+        },
+        pointLabels: {
+          font: {
+            size: 12, // フォントサイズ
+            weight: 700, // フォントの太さを設定
+          },
         },
       },
     },

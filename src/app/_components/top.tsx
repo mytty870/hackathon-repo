@@ -11,7 +11,11 @@ import {
 import ServiceDescription from './servicedescription/servicedescription'
 
 export default function Top() {
-  const service = { AI面接練習: '/interview', ES添削: 'es-feedback' }
+  const service = {
+    AI面接練習: '/interview',
+    ES添削: '/es-feedback',
+    就活チャットボット: '/qa',
+  }
   return (
     <div>
       <section className="bg-white py-12">
@@ -23,13 +27,13 @@ export default function Top() {
                 <Card>
                   <CardHeader className="p-0">
                     <Image
-                      src={`/interview.png`}
+                      src={`${url}.png`}
                       alt={`${item}`}
                       className="h-36 w-full object-cover"
                     />
                   </CardHeader>
                   <CardBody>
-                    <p>{item}</p>
+                    <p className="text-xl">{item}</p>
                   </CardBody>
                   <CardFooter className="flex justify-center">
                     <Link href={url} className="items-center">

@@ -5,7 +5,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Textarea, Button } from '@nextui-org/react'
-import { dummyResult } from './constants'
+// import { dummyResult } from './constants'
 import { Overview } from './Overview'
 
 const schema = z.object({
@@ -71,21 +71,22 @@ export const EsForm: React.FC = () => {
     texts.forEach(text => formData.append(`texts`, text))
 
     try {
-      // const response = await fetch('http://localhost:8080/es_feedback/', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/x-www-form-urlencoded',
-      //   },
-      //   body: formData.toString(),
-      // })
+      const response = await fetch('http://localhost:8080/es_feedback/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString(),
+      })
 
-      // if (!response.ok) {
-      //   throw new Error('Network response was not ok')
-      // }
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
 
-      // const result = await response.json()
+      const result = await response.json()
 
-      setData(dummyResult)
+      // setData(dummyResult)
+      setData(result)
       setIsSubmitting(false)
     } catch (error) {
       console.error('Error:', error)

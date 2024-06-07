@@ -3,7 +3,7 @@
 import { EvaluationRadarChart } from './EvaluationRaderChart'
 import { EvaluationDetails } from './EvaluationDetails'
 
-import { Accordion, AccordionItem } from '@nextui-org/react'
+import { Accordion, AccordionItem, Link, Button } from '@nextui-org/react'
 import TotalScoreRadarChart from './TotalScoreRadarChart/TotalScoreRadarChart'
 
 function transformData(interviewSession: any) {
@@ -265,38 +265,60 @@ export const Evaluation = ({ interviewSession }: EvaluationProps) => {
 
   return (
     <div>
-      <h2>総合スコア</h2>
-      <div className="flex flex-wrap items-start">
-        <div className="order-1 w-full md:order-1 md:w-1/2">
-          <h1 className="p-5 text-7xl">{totalScore}</h1>
-          <p className="p-5">{transformedData.summary}</p>
-        </div>
-        <div className="order-2 flex w-full justify-center p-3 md:order-2 md:w-1/2">
-          <TotalScoreRadarChart evaluationResults={evaluationResults} />
+      <div className="flex flex-wrap justify-center">
+        <div className="w-full md:w-[70%] p-1">
+          <h2 className="text-center">総合スコア</h2>
+          <div className="flex flex-wrap items-start">
+            <div className="order-1 w-full md:order-1 md:w-1/2 p-4">
+              <h1 className="p-5 text-7xl text-center">{totalScore}点</h1>
+              <p className="p-5">{transformedData.summary}</p>
+            </div>
+            <div className="order-2 flex w-full justify-center p-3 md:order-2 md:w-1/2 p-4">
+              <TotalScoreRadarChart evaluationResults={evaluationResults} />
+            </div>
+          </div>
+
+          <Accordion className="w-[90%] mx-auto">
+            {evaluationResults.map((result, index) => (
+              <AccordionItem
+                key={index}
+                aria-label="詳細"
+                title={`質問 ${index + 1}の詳細`}
+              >
+                <div key={index} className="mb-5">
+                  <div className="mt-3 flex flex-wrap">
+                    <div className="order-1 flex w-full justify-center p-2 md:order-2 md:w-1/2 p-4">
+                      <EvaluationRadarChart evaluationResult={result} />
+                    </div>
+                    <div className="order-2 w-full p-2 md:order-1 md:w-1/2 p-4">
+                      <EvaluationDetails
+                        evaluationResult={result.evaluations}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </div>
-
-      <Accordion>
-        {evaluationResults.map((result, index) => (
-          <AccordionItem
-            key={index}
-            aria-label="詳細"
-            title={`質問 ${index + 1}の詳細`}
-          >
-            <div key={index} className="mb-5">
-              <h2 className="text-lg font-semibold">質問{index + 1}の結果</h2>
-              <div className="mt-3 flex flex-wrap">
-                <div className="order-2 w-full p-2 md:order-1 md:w-1/2">
-                  <EvaluationDetails evaluationResult={result.evaluations} />
-                </div>
-                <div className="order-1 flex w-full justify-center p-2 md:order-2 md:w-1/2">
-                  <EvaluationRadarChart evaluationResult={result} />
-                </div>
-              </div>
-            </div>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      <div className="flex flex-wrap justify-center mt-5 space-y-2 md:space-y-0 md:space-x-2">
+        <Link href="/ranking" className="w-full md:w-auto px-9">
+          <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
+            ランキングに移動する
+          </Button>
+        </Link>
+        <Link href="/mypage" className="w-full md:w-auto px-9">
+          <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
+            過去の結果を確認する
+          </Button>
+        </Link>
+        <Link href="/interview" className="w-full md:w-auto px-9">
+          <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
+            再度面接練習をする
+          </Button>
+        </Link>
+      </div>
     </div>
   )
 }

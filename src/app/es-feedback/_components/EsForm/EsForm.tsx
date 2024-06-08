@@ -6,20 +6,22 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Textarea, Button } from '@nextui-org/react'
 import { Overview } from './Overview'
-// import { dummyResult } from './constants'
 
 const schema = z.object({
   answer1: z
     .string()
     .min(1, '入力は必須です')
+    .min(100, '100文字以上の入力が必須となります')
     .max(400, '400文字以内で入力してください'),
   answer2: z
     .string()
     .min(1, '入力は必須です')
+    .min(100, '100文字以上の入力が必須となります')
     .max(400, '400文字以内で入力してください'),
   answer3: z
     .string()
     .min(1, '入力は必須です')
+    .min(100, '100文字以上の入力が必須となります')
     .max(400, '400文字以内で入力してください'),
 })
 
@@ -81,7 +83,6 @@ export const EsForm: React.FC = () => {
       const responseText = await response.json()
       const resultData = JSON.parse(responseText)
       setResult(resultData)
-      // setResult(dummyResult)
       setIsSubmitting(false)
     } catch (error) {
       console.error('Error:', error)

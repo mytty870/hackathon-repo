@@ -54,7 +54,7 @@ export const Header = ({ session }: any) => {
       >
         <div className="container mx-auto flex items-center justify-between px-4 py-2">
           <h1 className="text-2xl sm:text-3xl font-semibold text-blue-600 tracking-tight">
-            <Link href="/">就活支援しまっせ！</Link>
+            <Link href="/">就活支援しまっせ</Link>
           </h1>
           <NavbarContent justify="end">
             {session && session.user && session.user.userName ? (

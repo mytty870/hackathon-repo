@@ -1,8 +1,9 @@
-from io import BytesIO
-import openai
-from dotenv import load_dotenv, find_dotenv
 import os
-from os.path import join, dirname
+from io import BytesIO
+from os.path import dirname, join
+
+import openai
+from dotenv import find_dotenv, load_dotenv
 
 
 def voice_to_text(url):
@@ -12,11 +13,8 @@ def voice_to_text(url):
     openai.api_key = OPENAI_APIKEY
 
     audio = open(url, "rb")
-    # audio_data = BytesIO(audio)
-    # audio_data.name = 'from_mic.wav'
     transcript = openai.audio.transcriptions.create(
         file = audio,
         model = 'whisper-1',
         language='ja')
     return transcript.text
-    

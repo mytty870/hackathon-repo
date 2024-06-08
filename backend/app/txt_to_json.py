@@ -1,8 +1,9 @@
-import openai
 import json
-from dotenv import load_dotenv, find_dotenv
 import os
-from os.path import join, dirname
+from os.path import dirname, join
+
+import openai
+from dotenv import find_dotenv, load_dotenv
 
 
 def txt_to_json(text) -> str:

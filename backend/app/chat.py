@@ -1,15 +1,15 @@
-import openai
 import json
-from dotenv import load_dotenv, find_dotenv
 import os
-from os.path import join, dirname
+from os.path import dirname, join
+
+import openai
+from dotenv import find_dotenv, load_dotenv
 from txt_to_json import txt_to_json
 
 
 def chat(text) -> str:
     dotenv_path = join(dirname(__file__), '.env')
     load_dotenv(verbose=True, dotenv_path=dotenv_path)
-
     OPENAI_APIKEY = os.getenv("API_KEY")
     openai.api_key = OPENAI_APIKEY
 
@@ -76,7 +76,7 @@ def chat(text) -> str:
 
     response_text = result.choices[0].message.content
     print(response_text)
-    
+
     try:
         response_json = json.loads(response_text)
         return response_json
@@ -84,5 +84,4 @@ def chat(text) -> str:
         print("Error: Response is not in JSON format")
         print("Details:", e)
         return txt_to_json(response_text)
-        
-    
+

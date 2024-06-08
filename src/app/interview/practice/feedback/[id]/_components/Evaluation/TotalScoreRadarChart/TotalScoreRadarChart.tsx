@@ -21,7 +21,7 @@ ChartJS.register(
   Legend,
 )
 
-export const TotalScoreRadarChart = ({ evaluationTotalScores }) => {
+export const TotalScoreRadarChart = ({ evaluationTotalScores }: any) => {
   const labels = [
     '口癖',
     '一人称の統一',

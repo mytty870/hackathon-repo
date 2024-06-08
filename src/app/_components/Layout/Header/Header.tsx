@@ -53,11 +53,9 @@ export const Header = ({ session }) => {
         onMenuOpenChange={setIsMenuOpen}
       >
         <div className="container mx-auto flex items-center justify-between px-4 py-2">
-          <NavbarContent>
-            <h1 className="text-3xl font-semibold text-blue-600 tracking-tight">
-              <Link href="/">就活支援しまっせ！</Link>
-            </h1>
-          </NavbarContent>
+          <h1 className="text-2xl sm:text-3xl font-semibold text-blue-600 tracking-tight">
+            <Link href="/">就活支援しまっせ！</Link>
+          </h1>
           <NavbarContent justify="end">
             {session && session.user && session.user.userName ? (
               <Dropdown className="hidden sm:block">

@@ -122,15 +122,20 @@ export const Question = ({
       />
       <div>
         {questionNum === 4 ? (
-          <Button
-            color="secondary"
-            onClick={handleEvaluate}
-            isDisabled={!isRecorded}
-            isLoading={isLoading}
-            className="mt-4"
-          >
-            {isLoading ? '評価中' : '評価する'}
-          </Button>
+          <>
+            <Button
+              className="gap-0 rounded-full border-2 border-gray-400 hover:border-gray-600 focus:outline-none"
+              onClick={handleEvaluate}
+              isDisabled={!isRecorded}
+              isLoading={isLoading}
+              endContent={!isLoading && <ArrowRightAltIcon />}
+            >
+              {isLoading ? '評価中' : '評価する'}
+            </Button>
+            <p className="text-red-500 text-sm mt-4">
+              ※結果が出るまでに少し時間がかかります
+            </p>
+          </>
         ) : (
           <div className="flex items-center justify-center">
             <Button

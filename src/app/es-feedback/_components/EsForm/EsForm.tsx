@@ -1,12 +1,12 @@
 /* eslint-disable */
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Textarea, Button } from '@nextui-org/react'
-// import { dummyResult } from './constants'
 import { Overview } from './Overview'
+// import { dummyResult } from './constants'
 
 const schema = z.object({
   answer1: z
@@ -33,6 +33,7 @@ export const EsForm: React.FC = () => {
   ]
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [result, setResult] = useState<any[]>([])
 
   const {
     control,
@@ -53,22 +54,16 @@ export const EsForm: React.FC = () => {
     return !dirtyFields[fieldId] || errors[fieldId]
   }
 
-  const [data, setData] = useState(null)
-
   const isSubmitDisabled = questionList.some(({ id }) =>
     isFieldEmptyOrHasError(id as keyof FormValues),
   )
 
-  // const onSubmit: SubmitHandler<FormValues> = data => {
-  //   console.log(data);
-  // };
-
-  const onSubmit: SubmitHandler<FormValues> = async data => {
+  const onSubmit: SubmitHandler<FormValues> = async formData => {
     setIsSubmitting(true)
-    const texts = [data.answer1, data.answer2, data.answer3]
+    const texts = [formData.answer1, formData.answer2, formData.answer3]
 
-    const formData = new URLSearchParams()
-    texts.forEach(text => formData.append(`texts`, text))
+    const formParams = new URLSearchParams()
+    texts.forEach(text => formParams.append('texts', text))
 
     try {
       const response = await fetch('http://localhost:8080/es_feedback/', {
@@ -76,17 +71,17 @@ export const EsForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: formData.toString(),
+        body: formParams.toString(),
       })
 
       if (!response.ok) {
         throw new Error('Network response was not ok')
       }
 
-      const result = await response.json()
-
-      // setData(dummyResult)
-      setData(result)
+      const responseText = await response.json()
+      const resultData = JSON.parse(responseText)
+      setResult(resultData)
+      // setResult(dummyResult)
       setIsSubmitting(false)
     } catch (error) {
       console.error('Error:', error)
@@ -95,19 +90,13 @@ export const EsForm: React.FC = () => {
     }
   }
 
-  useEffect(() => {
-    if (data) {
-      window.scrollTo(0, 0)
-    }
-  }, [data])
-
   const handleRest = () => {
-    setData(null)
+    setResult([])
     setIsSubmitting(false)
     reset()
   }
 
-  if (!data) {
+  if (result.length === 0) {
     return (
       <>
         <Overview />
@@ -126,20 +115,18 @@ export const EsForm: React.FC = () => {
                     name={id as keyof FormValues}
                     control={control}
                     render={({ field }) => (
-                      <>
-                        <Textarea
-                          {...field}
-                          variant="bordered"
-                          disableAnimation
-                          disableAutosize
-                          isInvalid={!!errors[id as keyof FormValues]}
-                          errorMessage={errors[id as keyof FormValues]?.message}
-                          classNames={{
-                            input: 'resize-y min-h-[150px]',
-                            errorMessage: 'text-red-500 text-lg',
-                          }}
-                        />
-                      </>
+                      <Textarea
+                        {...field}
+                        variant="bordered"
+                        disableAnimation
+                        disableAutosize
+                        isInvalid={!!errors[id as keyof FormValues]}
+                        errorMessage={errors[id as keyof FormValues]?.message}
+                        classNames={{
+                          input: 'resize-y min-h-[150px]',
+                          errorMessage: 'text-red-500 text-lg',
+                        }}
+                      />
                     )}
                   />
                 </div>
@@ -160,43 +147,46 @@ export const EsForm: React.FC = () => {
     )
   }
 
-  return (
-    <div className="container mx-auto p-4">
-      <h2 className="p-3 text-center text-4xl underline mb-8">ES添削</h2>
-      <h3 className="text-3xl text-center mb-4">評価結果</h3>
-      {dummyResult.map((result, index) => {
-        const { input_text, response } = result
+  if (result.length > 0) {
+    return (
+      <div className="container mx-auto p-4">
+        <h2 className="p-3 text-center text-4xl underline mb-8">ES添削</h2>
+        <h3 className="text-3xl text-center mb-4">評価結果</h3>
+        {result.map((resultItem, index) => {
+          const { input_text, response } = resultItem
 
-        return (
-          <div key={index} className="border p-4 my-4">
-            <h3 className="text-2xl mb-2">入力された文章: {input_text}</h3>
-            {response.error ? (
-              <div className="text-red-500">
-                <p>{response.error.message}</p>
-              </div>
-            ) : (
-              Object.keys(response).map(key => (
-                <div key={key} className="mb-4">
-                  <h4 className="text-xl font-bold">テキスト {key}</h4>
-                  <p>
-                    <strong>添削前文章:</strong> {response[key].添削前文章}
-                  </p>
-                  <p>
-                    <strong>添削後文章:</strong>{' '}
-                    {response[key].添削後文章 || '（添削後の文章はありません）'}
-                  </p>
-                  <p>
-                    <strong>添削理由:</strong> {response[key].添削理由}
-                  </p>
+          return (
+            <div key={index} className="border p-4 my-4">
+              <h3 className="text-2xl mb-2">入力された文章: {input_text}</h3>
+              {response.error ? (
+                <div className="text-red-500">
+                  <p>{response.error.message}</p>
                 </div>
-              ))
-            )}
-          </div>
-        )
-      })}
-      <Button color="primary" onClick={handleRest}>
-        もう一度試す
-      </Button>
-    </div>
-  )
+              ) : (
+                Object.keys(response).map(key => (
+                  <div key={key} className="mb-4">
+                    <h4 className="text-xl font-bold">テキスト {key}</h4>
+                    <p>
+                      <strong>添削前文章:</strong> {response[key].添削前文章}
+                    </p>
+                    <p>
+                      <strong>添削後文章:</strong>{' '}
+                      {response[key].添削後文章 ||
+                        '（添削後の文章はありません）'}
+                    </p>
+                    <p>
+                      <strong>添削理由:</strong> {response[key].添削理由}
+                    </p>
+                  </div>
+                ))
+              )}
+            </div>
+          )
+        })}
+        <Button color="primary" onClick={handleRest}>
+          もう一度試す
+        </Button>
+      </div>
+    )
+  }
 }

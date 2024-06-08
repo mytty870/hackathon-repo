@@ -1,0 +1,175 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @unique
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expires      DateTime
+}
+
+model User {
+  id                String             @id @default(cuid())
+  name              String?
+  userName          String?
+  email             String?            @unique
+  emailVerified     DateTime?
+  image             String?
+  createdAt         DateTime           @default(now())
+  // 業種
+  industry          String?
+  // 業態
+  businessType      String?
+  accounts          Account[]
+  sessions          Session[]
+  interviewSessions InterviewSession[]
+}
+
+// 各面接
+model InterviewSession {
+  id                         String   @id @default(cuid())
+  userId                     String
+  user                       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  summary                    String?
+  totalScore                 Int?
+  industry                   String?
+  businessType               String?
+  createdAt                  DateTime @default(now())
+  question1InputText         String?
+  question1Evaluation1Score  Int?
+  question1Evaluation1Reason String?
+  question1Evaluation2Score  Int?
+  question1Evaluation2Reason String?
+  question1Evaluation3Score  Int?
+  question1Evaluation3Reason String?
+  question1Evaluation4Score  Int?
+  question1Evaluation4Reason String?
+  question1Evaluation5Score  Int?
+  question1Evaluation5Reason String?
+  question2InputText         String?
+  question2Evaluation1Score  Int?
+  question2Evaluation1Reason String?
+  question2Evaluation2Score  Int?
+  question2Evaluation2Reason String?
+  question2Evaluation3Score  Int?
+  question2Evaluation3Reason String?
+  question2Evaluation4Score  Int?
+  question2Evaluation4Reason String?
+  question2Evaluation5Score  Int?
+  question2Evaluation5Reason String?
+  question3InputText         String?
+  question3Evaluation1Score  Int?
+  question3Evaluation1Reason String?
+  question3Evaluation2Score  Int?
+  question3Evaluation2Reason String?
+  question3Evaluation3Score  Int?
+  question3Evaluation3Reason String?
+  question3Evaluation4Score  Int?
+  question3Evaluation4Reason String?
+  question3Evaluation5Score  Int?
+  question3Evaluation5Reason String?
+  question4InputText         String?
+  question4Evaluation1Score  Int?
+  question4Evaluation1Reason String?
+  question4Evaluation2Score  Int?
+  question4Evaluation2Reason String?
+  question4Evaluation3Score  Int?
+  question4Evaluation3Reason String?
+  question4Evaluation4Score  Int?
+  question4Evaluation4Reason String?
+  question4Evaluation5Score  Int?
+  question4Evaluation5Reason String?
+  question5InputText         String?
+  question5Evaluation1Score  Int?
+  question5Evaluation1Reason String?
+  question5Evaluation2Score  Int?
+  question5Evaluation2Reason String?
+  question5Evaluation3Score  Int?
+  question5Evaluation3Reason String?
+  question5Evaluation4Score  Int?
+  question5Evaluation4Reason String?
+  question5Evaluation5Score  Int?
+  question5Evaluation5Reason String?
+}
+
+// // 各面接
+// model InterviewSession {
+//   id                 String              @id @default(cuid())
+//   userId             String
+//   user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   industry           String?
+//   businessType       String?
+//   createdAt          DateTime            @default(now())
+//   interviewQuestions InterviewQuestion[]
+// }
+
+// // 各質問
+// model InterviewQuestion {
+//   id                                 String                              @id @default(cuid())
+//   sessionId                          String
+//   session                            InterviewSession                    @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+//   filename                           String
+//   inputText                          String
+//   interviewQuestionEvaluationDetails InterviewQuestionEvaluationDetail[]
+//   createdAt                          DateTime                            @default(now())
+// }
+
+// // 各質問の評価
+// model InterviewQuestionEvaluationDetail {
+//   id         String            @id @default(cuid())
+//   questionId String
+//   question   InterviewQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+//   score      Int
+//   reason     String
+//   createdAt  DateTime          @default(now())
+// }
+
+// enum Industry {
+//   Engineering
+//   Business
+// }
+
+// enum BusinessType {
+//   SES
+//   SIER
+// }
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

@@ -76,7 +76,8 @@ export const Question = ({
     try {
       // const response = await fetch('http://localhost:8080/upload/', {
       const response = await fetch(
-        'https://hackathon-backend-0608.onrender.com/upload/',
+        // 'https://hackathon-backend-0608.onrender.com/upload/',
+        'https://hackathon-backend-0608-wspwxynxtq-an.a.run.app/upload/',
         {
           method: 'POST',
           body: formData,

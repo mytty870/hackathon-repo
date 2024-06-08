@@ -30,8 +30,6 @@ export const TotalScoreRadarChart = ({ evaluationTotalScores }) => {
     '言葉の使い方',
   ]
 
-  console.log('aa', evaluationTotalScores)
-
   // 各評価のスコアを合計
 
   const data = {

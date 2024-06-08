@@ -238,10 +238,7 @@ type EvaluationProps = {
   question5Evaluation5Reason: string | null
 }
 export const Evaluation = ({ interviewSession }: EvaluationProps) => {
-  console.log(interviewSession)
-
   const transformedData = transformData(interviewSession)
-  console.log(transformedData.questions)
 
   const evaluationResults = transformedData.questions
 
@@ -260,8 +257,6 @@ export const Evaluation = ({ interviewSession }: EvaluationProps) => {
     transformedData.evaluation4TotalScore,
     transformedData.evaluation5TotalScore,
   ]
-
-  console.log(totalScore)
 
   return (
     <div className="bg-gray-100">

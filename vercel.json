@@ -1,0 +1,8 @@
+{
+  "build": {
+    "outputDirectory": "dist",
+    "scripts": {
+      "build": "npm run build && prisma generate"
+    }
+  }
+}

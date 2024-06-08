@@ -3,7 +3,6 @@ import { Button } from '@nextui-org/react'
 import { Recorder } from '../Recorder'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { dummyResult } from './constant'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt'
 
 type EvaluationDetail = {
@@ -68,29 +67,26 @@ export const Question = ({
 
   const handleEvaluate = async () => {
     setIsLoading(true)
-    //     const formData = new FormData()
+    const formData = new FormData()
 
-    // recordings.forEach((recording, index) => {
-    //   formData.append('files', recording, `recording_${index + 1}.wav`)
-    // })
+    recordings.forEach((recording, index) => {
+      formData.append('files', recording, `recording_${index + 1}.wav`)
+    })
 
     try {
-      // const response = await fetch('http://localhost:8080/upload/', {
-      //           method: 'POST',
-      //           body: formData,
-      //         });
+      const response = await fetch('http://localhost:8080/upload/', {
+        method: 'POST',
+        body: formData,
+      })
 
-      // const result = await response.json()
-
-      // console.log(result)
+      const result = await response.json()
 
       const saveResponse = await fetch('/api/interview-evaluation', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        // body: result,
-        body: JSON.stringify(dummyResult),
+        body: result,
       })
 
       const saveResult = await saveResponse.json()
@@ -100,8 +96,6 @@ export const Question = ({
       } else {
         router.push(`/interview/practice/feedback/${saveResult.id}`)
       }
-
-      // console.log(saveResult.id)
 
       setIsLoading(false)
     } catch (error) {
@@ -139,7 +133,6 @@ export const Question = ({
         ) : (
           <div className="flex items-center justify-center">
             <Button
-              // color="secondary"
               onClick={handleNextQuestion}
               isDisabled={!isRecorded}
               className="flex size-12 items-center justify-center rounded-full border-2 border-gray-400 hover:border-gray-600 focus:outline-none"

@@ -16,8 +16,6 @@ export default async function Page() {
     },
   })
 
-  console.log(interviewSessions)
-
   return (
     <div className="mx-auto max-w-4xl p-4">
       <div className="mb-6 rounded-lg border border-blue-300 bg-white p-6 shadow-md">

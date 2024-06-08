@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Textarea, Button } from '@nextui-org/react'
+import { Textarea, Button, Accordion, AccordionItem } from '@nextui-org/react'
 import { Overview } from './Overview'
 // import { dummyResult } from './constants'
 
@@ -151,41 +151,49 @@ export const EsForm: React.FC = () => {
     return (
       <div className="container mx-auto p-4">
         <h2 className="p-3 text-center text-4xl underline mb-8">ES添削</h2>
-        <h3 className="text-3xl text-center mb-4">評価結果</h3>
+        <h3 className="text-3xl text-center mb-4">添削結果</h3>
         {result.map((resultItem, index) => {
           const { input_text, response } = resultItem
 
           return (
-            <div key={index} className="border p-4 my-4">
-              <h3 className="text-2xl mb-2">入力された文章: {input_text}</h3>
+            <div className="border p-4 my-4">
+              <h3 className="md:text-xl text-md mb-2">
+                <strong>入力された文章:</strong> {input_text}
+              </h3>
               {response.error ? (
                 <div className="text-red-500">
                   <p>{response.error.message}</p>
                 </div>
               ) : (
-                Object.keys(response).map(key => (
-                  <div key={key} className="mb-4">
-                    <h4 className="text-xl font-bold">テキスト {key}</h4>
-                    <p>
-                      <strong>添削前文章:</strong> {response[key].添削前文章}
-                    </p>
-                    <p>
-                      <strong>添削後文章:</strong>{' '}
-                      {response[key].添削後文章 ||
-                        '（添削後の文章はありません）'}
-                    </p>
-                    <p>
-                      <strong>添削理由:</strong> {response[key].添削理由}
-                    </p>
-                  </div>
-                ))
+                <Accordion>
+                  {Object.keys(response).map(key => (
+                    <AccordionItem key={key} title={`添削結果 ${key}`}>
+                      <div className="mb-4 border-top border-gray-300">
+                        <p className="border-b border-dashed text-xl">
+                          <strong>添削前文章:</strong>{' '}
+                          {response[key].添削前文章}
+                        </p>
+                        <p className="border-b border-dashed text-xl">
+                          <strong>添削後文章:</strong>{' '}
+                          {response[key].添削後文章 ||
+                            '（添削後の文章はありません）'}
+                        </p>
+                        <p className="text-xl">
+                          <strong>添削理由:</strong> {response[key].添削理由}
+                        </p>
+                      </div>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               )}
             </div>
           )
         })}
-        <Button color="primary" onClick={handleRest}>
-          もう一度試す
-        </Button>
+        <div className="flex items-center justify-center">
+          <Button className="items-center" color="primary" onClick={handleRest}>
+            もう一度試す
+          </Button>
+        </div>
       </div>
     )
   }

@@ -4,6 +4,7 @@ import { Accordion, AccordionItem } from '@nextui-org/react'
 type ScoreDetailsProps = {
   createdAt: Date
   summary: string | null
+  userName: string | null
 }
 
 export const ScoreDetails = ({ createdAt, summary }: ScoreDetailsProps) => {

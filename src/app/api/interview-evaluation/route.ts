@@ -1,8 +1,8 @@
 import { getServerSession } from '@/lib/auth'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
-export async function POST(request: NextResponse) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession()
 
   if (!session || !session.user) {
@@ -14,7 +14,7 @@ export async function POST(request: NextResponse) {
   const sessionData = await request.json()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const calculateTotalScore = data => {
+  const calculateTotalScore = (data: any) => {
     let totalScore = 0
     const iterations = Math.min(5, data.length) // 配列の長さが5より短い場合に対応
 

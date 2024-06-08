@@ -23,7 +23,7 @@ ChartJS.register(
 export const EvaluationRadarChart = ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   evaluationResult,
-}) => {
+}: any) => {
   const labels = [
     '口癖',
     '一人称の統一',

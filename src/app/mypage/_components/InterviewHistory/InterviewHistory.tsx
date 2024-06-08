@@ -48,30 +48,34 @@ export const InterviewHistory = ({
   return (
     <div className="mx-auto max-w-4xl p-4">
       <h3 className="mb-4 text-2xl font-bold">面接練習履歴</h3>
-      <ul className="space-y-4">
-        {sortedSessions.map((session, index) => (
-          <li className="rounded-lg bg-white p-4 shadow-md" key={session.id}>
-            <Link href={`/interview/practice/feedback/${session.id}`}>
-              <div className="mb-2">
-                <h4 className="text-lg font-semibold">
-                  {sortedSessions.length - index}回目
-                </h4>
-              </div>
-              <div className="mb-2 flex items-center justify-between">
-                <span className="font-medium text-blue-500">
-                  点数: {calculateTotalScore(session)}
-                </span>
-                <span className="text-sm text-gray-500">
-                  {new Date(session.createdAt).toLocaleDateString()}
-                </span>
-              </div>
-              <div className="mt-2">
-                <p>Summary: {session.summary || 'No Summary'}</p>
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {sortedSessions.length === 0 ? (
+        <p>現在面接練習履歴はございません。</p>
+      ) : (
+        <ul className="space-y-4">
+          {sortedSessions.map((session, index) => (
+            <li className="rounded-lg bg-white p-4 shadow-md" key={session.id}>
+              <Link href={`/interview/practice/feedback/${session.id}`}>
+                <div className="mb-2">
+                  <h4 className="text-lg font-semibold">
+                    {sortedSessions.length - index}回目
+                  </h4>
+                </div>
+                <div className="mb-2 flex items-center justify-between">
+                  <span className="font-medium text-blue-500">
+                    点数: {calculateTotalScore(session)}
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {new Date(session.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+                <div className="mt-2">
+                  <p>Summary: {session.summary || 'No Summary'}</p>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }

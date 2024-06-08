@@ -301,7 +301,7 @@ export const Evaluation = ({ interviewSession }: EvaluationProps) => {
             ))}
           </Accordion>
           <div className="flex flex-wrap justify-center mt-8 space-y-2 md:space-y-0 md:space-x-2 mb-4">
-            <Link href="/ranking" className="w-full md:w-auto px-9">
+            <Link href="/interview/ranking" className="w-full md:w-auto px-9">
               <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
                 ランキングに移動する
               </Button>

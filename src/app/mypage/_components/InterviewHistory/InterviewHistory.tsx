@@ -9,7 +9,7 @@ export const InterviewHistory = ({
   interviewSessions,
 }: InterviewHistoryProps) => {
   const calculateTotalScore = (session: InterviewSession): number => {
-    const scores = [
+    const scores: (number | null)[] = [
       session.question1Evaluation1Score,
       session.question1Evaluation2Score,
       session.question1Evaluation3Score,
@@ -38,7 +38,7 @@ export const InterviewHistory = ({
     ]
 
     // nullのスコアを0に変換し合計を計算
-    return scores.reduce((total, score) => total + (score ?? 0), 0)
+    return scores.reduce<number>((total, score) => total + (score ?? 0), 0)
   }
 
   const sortedSessions = interviewSessions.sort(

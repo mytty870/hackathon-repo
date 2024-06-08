@@ -19,7 +19,7 @@ import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 
-export const Header = ({ session }) => {
+export const Header = ({ session }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const pathName = usePathname()

@@ -68,13 +68,16 @@ export const EsForm: React.FC = () => {
     texts.forEach(text => formParams.append('texts', text))
 
     try {
-      const response = await fetch('http://localhost:8080/es_feedback/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+      const response = await fetch(
+        'https://hackathon-backend-0608.onrender.com/es_feedback/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: formParams.toString(),
         },
-        body: formParams.toString(),
-      })
+      )
 
       if (!response.ok) {
         throw new Error('Network response was not ok')

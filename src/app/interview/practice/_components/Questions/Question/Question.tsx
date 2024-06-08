@@ -74,10 +74,14 @@ export const Question = ({
     })
 
     try {
-      const response = await fetch('http://localhost:8080/upload/', {
-        method: 'POST',
-        body: formData,
-      })
+      // const response = await fetch('http://localhost:8080/upload/', {
+      const response = await fetch(
+        'https://hackathon-backend-0608.onrender.com/upload/',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      )
 
       const result = await response.json()
 

@@ -19,7 +19,7 @@ export default async function Page() {
 
   return (
     <div className="mx-auto max-w-3xl p-4">
-      <h1 className="mb-6 text-center text-2xl font-bold">Ranking Page</h1>
+      <h1 className="mb-6 text-center text-2xl font-bold">ランキングページ</h1>
       {topInterviewSessions.length === 0 ? (
         <p className="text-center">インタビューの投稿がありません</p>
       ) : (

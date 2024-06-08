@@ -175,69 +175,7 @@ function transformData(interviewSession: any) {
   return transformedData
 }
 
-type EvaluationProps = {
-  id: string
-  userId: string
-  industry: string | null
-  businessType: string | null
-  createdAt: Date
-  question1InputText: string | null
-  question1Evaluation1Score: number | null
-  question1Evaluation1Reason: string | null
-  question1Evaluation2Score: number | null
-  question1Evaluation2Reason: string | null
-  question1Evaluation3Score: number | null
-  question1Evaluation3Reason: string | null
-  question1Evaluation4Score: number | null
-  question1Evaluation4Reason: string | null
-  question1Evaluation5Score: number | null
-  question1Evaluation5Reason: string | null
-  question2InputText: string | null
-  question2Evaluation1Score: number | null
-  question2Evaluation1Reason: string | null
-  question2Evaluation2Score: number | null
-  question2Evaluation2Reason: string | null
-  question2Evaluation3Score: number | null
-  question2Evaluation3Reason: string | null
-  question2Evaluation4Score: number | null
-  question2Evaluation4Reason: string | null
-  question2Evaluation5Score: number | null
-  question2Evaluation5Reason: string | null
-  question3InputText: string | null
-  question3Evaluation1Score: number | null
-  question3Evaluation1Reason: string | null
-  question3Evaluation2Score: number | null
-  question3Evaluation2Reason: string | null
-  question3Evaluation3Score: number | null
-  question3Evaluation3Reason: string | null
-  question3Evaluation4Score: number | null
-  question3Evaluation4Reason: string | null
-  question3Evaluation5Score: number | null
-  question3Evaluation5Reason: string | null
-  question4InputText: string | null
-  question4Evaluation1Score: number | null
-  question4Evaluation1Reason: string | null
-  question4Evaluation2Score: number | null
-  question4Evaluation2Reason: string | null
-  question4Evaluation3Score: number | null
-  question4Evaluation3Reason: string | null
-  question4Evaluation4Score: number | null
-  question4Evaluation4Reason: string | null
-  question4Evaluation5Score: number | null
-  question4Evaluation5Reason: string | null
-  question5InputText: string | null
-  question5Evaluation1Score: number | null
-  question5Evaluation1Reason: string | null
-  question5Evaluation2Score: number | null
-  question5Evaluation2Reason: string | null
-  question5Evaluation3Score: number | null
-  question5Evaluation3Reason: string | null
-  question5Evaluation4Score: number | null
-  question5Evaluation4Reason: string | null
-  question5Evaluation5Score: number | null
-  question5Evaluation5Reason: string | null
-}
-export const Evaluation = ({ interviewSession }: EvaluationProps) => {
+export const Evaluation = ({ interviewSession }: any) => {
   const transformedData = transformData(interviewSession)
 
   const evaluationResults = transformedData.questions

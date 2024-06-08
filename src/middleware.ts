@@ -12,5 +12,6 @@ export default withAuth({
 })
 
 export const config = {
-  matcher: ['/settings/account', '/interview/practice', '/mypage'],
+  // matcher: ['/settings/account', '/interview/practice', '/mypage'],
+  matcher: [],
 }

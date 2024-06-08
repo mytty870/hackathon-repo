@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/react'
 import React from 'react'
 
 export const LoginButtonGroup = () => {
-  const callbackUrl = 'http://localhost:3000/login/enter'
+  const callbackUrl = 'https://hackathon-wine-mu.vercel.app/login/enter'
   return (
     <div className="flex flex-col gap-6">
       <Button

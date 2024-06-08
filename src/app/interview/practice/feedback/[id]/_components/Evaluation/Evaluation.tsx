@@ -213,7 +213,7 @@ export const Evaluation = ({ interviewSession }: any) => {
             </div>
           </div>
 
-          <Accordion className="w-[90%] mx-auto">
+          <Accordion selectionMode="multiple" className="w-[90%] mx-auto">
             {evaluationResults.map((result, index) => (
               <AccordionItem
                 key={index}
@@ -230,25 +230,29 @@ export const Evaluation = ({ interviewSession }: any) => {
                         evaluationResult={result.evaluations}
                       />
                     </div>
+                    <div>
+                      <p className="font-bold mb-3">文字起こし結果↓</p>
+                      <p>{result.inputText}</p>
+                    </div>
                   </div>
                 </div>
               </AccordionItem>
             ))}
           </Accordion>
           <div className="flex flex-wrap justify-center mt-8 space-y-2 md:space-y-0 md:space-x-2 mb-4">
-            <Link href="/interview/ranking" className="w-full md:w-auto px-9">
+            <Link href="/interview/ranking" className="w-full md:w-auto px-4">
               <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
-                ランキングに移動する
+                ランキングに移動
               </Button>
             </Link>
-            <Link href="/mypage" className="w-full md:w-auto px-9">
+            <Link href="/mypage" className="w-full md:w-auto px-4">
               <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
-                過去の結果を確認する
+                過去の結果を確認
               </Button>
             </Link>
-            <Link href="/interview" className="w-full md:w-auto px-9">
+            <Link href="/interview" className="w-full md:w-auto px-4">
               <Button className="w-full bg-blue-400 text-white hover:bg-blue-600 md:w-auto h-[50px]">
-                再度面接練習をする
+                再度練習をする
               </Button>
             </Link>
           </div>

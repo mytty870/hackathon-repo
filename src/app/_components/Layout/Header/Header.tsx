@@ -32,7 +32,7 @@ export const Header = ({ session }: any) => {
 
   const handleSignOut = () => {
     setIsMenuOpen(false)
-    signOut({ callbackUrl: 'http://localhost:3000' })
+    signOut({ callbackUrl: 'https://hackathon-wine-mu.vercel.app' })
   }
 
   const serviceItems = [

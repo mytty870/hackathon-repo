@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { Avatar, Accordion, AccordionItem } from '@nextui-org/react'
+import { Avatar, Accordion, AccordionItem, Image } from '@nextui-org/react'
 
 export const Overview = () => {
   const evaluationItems = [
@@ -87,9 +87,19 @@ export const Overview = () => {
           ))}
         </Accordion>
         <div className="flex-1">
-          <div className="flex h-full items-center justify-center bg-gray-200 p-4">
-            {/* ここにグラフを挿入します */}
-            <p className="text-center">ここにグラフが入ります</p>
+          <div className="h-full flex-1 items-center justify-center p-4 ">
+            <Image
+              className="mb-4 rounded-lg border-4 border-gray-500"
+              width={700}
+              height={600}
+              src="/es-full.jpeg"
+            />
+            <Image
+              className="rounded-lg border-4 border-gray-500"
+              width={700}
+              height={600}
+              src="/es-full2.jpeg"
+            />
           </div>
         </div>
       </div>

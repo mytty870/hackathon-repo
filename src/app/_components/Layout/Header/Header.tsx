@@ -39,6 +39,7 @@ export const Header = ({ session }) => {
     { name: '面接練習', href: '/interview' },
     { name: '面接ランキング', href: '/interview/ranking' },
     { name: 'ES添削', href: '/es-feedback' },
+    { name: '就活関連チャットボット', href: '/qa' },
   ]
 
   return (

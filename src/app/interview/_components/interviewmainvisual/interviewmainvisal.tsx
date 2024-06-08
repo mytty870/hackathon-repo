@@ -73,7 +73,7 @@
 
 'use client'
 import React from 'react'
-import { Button, Avatar } from '@nextui-org/react'
+import { Button, Avatar, Image } from '@nextui-org/react'
 import Link from 'next/link'
 
 export const InterviewMainvisal = () => {
@@ -120,16 +120,19 @@ export const InterviewMainvisal = () => {
             <p>回答の論理性を評価し、論理的な話し方をアドバイスします。</p>
           </div>
           <div className="text-left">
-            <h3 className="text-md mb-2 font-medium md:text-lg">
-              ■言葉の使い方
-            </h3>
+            <h3 className="mb-2 font-medium md:text-lg">■言葉の使い方</h3>
             <p>言葉の選び方を評価し、より良い表現方法を提案します。</p>
           </div>
         </div>
         <div className="flex-1">
-          <div className="flex h-full items-center justify-center bg-gray-200 p-4">
-            {/* ここにグラフを挿入します */}
-            <p className="text-center">ここにグラフが入ります</p>
+          <div className="flex h-full items-center justify-center p-4">
+            <Image
+              className="rounded-lg border-4 border-gray-500"
+              width={600}
+              height={400}
+              alt="NextUI hero Image"
+              src="/interview-full.jpeg"
+            />
           </div>
         </div>
       </div>

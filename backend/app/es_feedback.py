@@ -1,8 +1,9 @@
-import openai
 import json
-from dotenv import load_dotenv, find_dotenv
 import os
-from os.path import join, dirname
+from os.path import dirname, join
+
+import openai
+from dotenv import find_dotenv, load_dotenv
 from txt_to_json import txt_to_json
 
 
@@ -11,11 +12,8 @@ def es_feedback(text) -> str:
     load_dotenv(verbose=True, dotenv_path=dotenv_path)
     OPENAI_APIKEY = os.getenv("API_KEY")
     openai.api_key = OPENAI_APIKEY
-
-
     result = openai.chat.completions.create(
         model='gpt-4o',
-        # response_format={ "type": "json_object" },
         messages=[
             {"role": "system", "content": """
 次に送るエントリーシートの文章を添削してください。出力形式に従って必ず複数出力してください。添削する部分がない場合は添削なしとしてください。なお、添削前文章は、絶対に一文にしてください。同じような理由でも分けて出力してください。関係のない文章は出力しないでください。
@@ -70,14 +68,11 @@ def es_feedback(text) -> str:
             {"role": "user", "content": text},
         ]
     )
-
     response_text = result.choices[0].message.content
     print(response_text)
-    
     try:
         response_json = json.loads(response_text)
         return response_json
     except json.JSONDecodeError as e:
         print("json形式が正しくないのでjsonに変換する関数を通します。")
         return txt_to_json(response_text)
-    

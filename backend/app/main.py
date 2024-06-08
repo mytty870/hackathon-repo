@@ -1,20 +1,19 @@
+import json
+import os
 from concurrent.futures import ProcessPoolExecutor
-from typing import Union, List
+from os.path import dirname, join
+from typing import List, Union
+
+import aiofiles
+import openai
+import requests
+from chat import chat
+from dotenv import find_dotenv, load_dotenv
+from es_feedback import es_feedback
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-import json 
-import requests
-import openai
-from chat import chat
-from whisper import voice_to_text
-from es_feedback import es_feedback
 from summary import summary
-from dotenv import load_dotenv, find_dotenv
-import os
-from os.path import join, dirname
-import aiofiles
-
-
+from whisper import voice_to_text
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(verbose=True, dotenv_path=dotenv_path)

@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
+import TotalEvaluationRadarChart from '@/app/interview/practice/_components/Questions/Evaluation/TotalScoreRadarChart/TotalScoreRadarChart'
 
 ChartJS.register(
   RadialLinearScale,
@@ -20,7 +21,7 @@ ChartJS.register(
   Legend,
 )
 
-export const TotalEvaluationRadarChart = ({ evaluationResults }) => {
+export const TotalScoreRadarChart = ({ evaluationTotalScores }) => {
   const labels = [
     '口癖',
     '一人称の統一',
@@ -29,6 +30,8 @@ export const TotalEvaluationRadarChart = ({ evaluationResults }) => {
     '言葉の使い方',
   ]
 
+  console.log('aa', evaluationTotalScores)
+
   // 各評価のスコアを合計
 
   const data = {
@@ -36,7 +39,7 @@ export const TotalEvaluationRadarChart = ({ evaluationResults }) => {
     datasets: [
       {
         label: '総合評価スコア (500点満点)',
-        data: evaluationResults,
+        data: evaluationTotalScores,
         backgroundColor: 'rgba(153, 102, 255, 0.2)',
         borderColor: 'rgba(153, 102, 255, 1)',
         borderWidth: 1,
@@ -65,5 +68,3 @@ export const TotalEvaluationRadarChart = ({ evaluationResults }) => {
 
   return <Radar data={data} options={options} />
 }
-
-export default TotalEvaluationRadarChart

@@ -4,7 +4,7 @@ import { EvaluationRadarChart } from './EvaluationRaderChart'
 import { EvaluationDetails } from './EvaluationDetails'
 
 import { Accordion, AccordionItem, Link, Button } from '@nextui-org/react'
-import TotalScoreRadarChart from './TotalScoreRadarChart/TotalScoreRadarChart'
+import { TotalScoreRadarChart } from './TotalScoreRadarChart'
 
 function transformData(interviewSession: any) {
   const transformedData = {
@@ -274,7 +274,9 @@ export const Evaluation = ({ interviewSession }: EvaluationProps) => {
               <p className="p-5">{transformedData.summary}</p>
             </div>
             <div className="order-2 flex w-full justify-center p-3 md:order-2 md:w-1/2 p-4">
-              <TotalScoreRadarChart evaluationResults={evaluationResults} />
+              <TotalScoreRadarChart
+                evaluationTotalScores={evaluationTotalScores}
+              />
             </div>
           </div>
 

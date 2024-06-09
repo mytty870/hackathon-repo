@@ -122,7 +122,7 @@ export const Header = ({ session }: any) => {
               </NavbarMenuItem>
             ))}
             <NavbarMenuItem className="py-2 border-t-2">
-              <NavLink href="mypage" onClick={handleLinkClick}>
+              <NavLink href="/mypage" onClick={handleLinkClick}>
                 マイページ
               </NavLink>
             </NavbarMenuItem>

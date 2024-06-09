@@ -94,7 +94,7 @@ export const Header = ({ session }: any) => {
             {!isLoginPath && (
               <NavbarMenuToggle
                 aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-                className="sm:hidden"
+                className="sm:hidden p-4 w-10 h-10"
               />
             )}
           </NavbarContent>
@@ -103,7 +103,7 @@ export const Header = ({ session }: any) => {
           <div
             className={`mt-2 hidden w-full border-t-3 border-blue-500 sm:block`}
           >
-            <div className="container mx-auto flex justify-center gap-12 px-4 py-2">
+            <div className="container mx-auto flex justify-center gap-10 md:gap-12 px-4 py-2">
               {serviceItems.map(item => (
                 <NavLink key={item.name} href={item.href}>
                   {item.name}
